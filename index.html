@@ -316,7 +316,7 @@ tbody tr:last-child td{border-bottom:none;}
   <a href="#analysis">🔍 วิเคราะห์ปัญหา</a>
   <a href="#timeline">🗓 แผนแก้ไข</a>
   <a href="#expected-results">🎯 ผลที่คาดหวัง</a>
-  <a href="#loss-analysis">📊 Total Loss</a>
+  <a href="#loss-analysis">📊 Total kWh Loss</a>
   <a href="#loss-rootcause">🔬 สาเหตุ Loss</a>
   <a href="#pm-plan">🔧 แผน PM</a>
   <a href="#export-meters">☀️ Export Meter</a>
@@ -758,12 +758,12 @@ tbody tr:last-child td{border-bottom:none;}
   <ul style="margin:0;padding-left:18px;font-size:13px;color:#333"><li style="margin-bottom:4px">หม้อแปลงกลับมา Online ส่งข้อมูลครบ 100%</li><li style="margin-bottom:4px">TTU Online Rate เพิ่มจาก 97.5% เป็น 100%</li><li style="margin-bottom:4px">ข้อมูลวิเคราะห์ครบถ้วนทุก TTU</li></ul>
 </div>
 <div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #70AD47">
-  <div style="font-weight:700;font-size:14px;margin-bottom:6px">📊 Total Loss ปรับปรุงแล้ว</div>
+  <div style="font-weight:700;font-size:14px;margin-bottom:6px">📊 Total kWh Loss ปรับปรุงแล้ว</div>
   <div style="font-size:12px;color:#666;margin-bottom:8px">PEA 59007593: Avg 8.55% (ปรับปรุงจาก 13.14% มี.ค.) | PEA 67030378: Avg 2.88% (ปรับปรุงจาก 19.11% มี.ค.)</div>
-  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333"><li style="margin-bottom:4px">Total Loss ลดสู่ระดับ &lt;5% หลังตรวจสอบมิเตอร์ครบ</li><li style="margin-bottom:4px">PV Generation ช่วยลด Net Load กลางวันที่ 67030378</li><li style="margin-bottom:4px">ระบุมิเตอร์ผิดปกติได้ชัดเจนขึ้น</li></ul>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333"><li style="margin-bottom:4px">Total kWh Loss ลดสู่ระดับ &lt;5% หลังตรวจสอบมิเตอร์ครบ</li><li style="margin-bottom:4px">PV Generation ช่วยลด Net Load กลางวันที่ 67030378</li><li style="margin-bottom:4px">ระบุมิเตอร์ผิดปกติได้ชัดเจนขึ้น</li></ul>
 </div>
 
-<div id="loss-analysis" class="section-title">📊 การวิเคราะห์ Total Loss – PEA 59007593 &amp; 67030378</div>
+<div id="loss-analysis" class="section-title">📊 การวิเคราะห์ Total kWh Loss – PEA 59007593 &amp; 67030378</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px;">
   <div class="chart-card">
     <h3>📡 PEA 59007593 – ร้านแดงโลหะกิต (160 kVA)</h3>
@@ -831,7 +831,7 @@ tbody tr:last-child td{border-bottom:none;}
 
 <div class="prob-card sev-high" style="margin-bottom:14px;">
   <div class="prob-header"><span class="prob-icon">📊</span>
-    <div class="prob-title-wrap"><span class="prob-type">การวิเคราะห์ Total Loss – PEA 59007593 (ร้านแดงโลหะกิต)</span>
+    <div class="prob-title-wrap"><span class="prob-type">การวิเคราะห์ Total kWh Loss – PEA 59007593 (ร้านแดงโลหะกิต)</span>
     <span class="prob-pea">ข้อมูล พฤษภาคม 2569 | 160 kVA | Median Loss 11.01% (ดีขึ้นจาก 49.01%)</span></div>
     <span class="prob-val">🟢 ปรับปรุงแล้ว</span></div>
   <div class="prob-body">
@@ -846,12 +846,12 @@ tbody tr:last-child td{border-bottom:none;}
           <li>ตรวจสอบ CT Ratio ของมิเตอร์ที่อาจวัดค่าผิดพลาด</li>
           <li>ตรวจสอบการใช้ไฟฟ้าผิดปกติในพื้นที่</li></ul></div>
     <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
-      <ul><li>Total Loss ลดต่ำกว่า 5%</li><li>ข้อมูลมิเตอร์ครบถ้วน 100%</li><li>ระบุมิเตอร์ผิดปกติได้ชัดเจน</li></ul></div>
+      <ul><li>Total kWh Loss ลดต่ำกว่า 5%</li><li>ข้อมูลมิเตอร์ครบถ้วน 100%</li><li>ระบุมิเตอร์ผิดปกติได้ชัดเจน</li></ul></div>
   </div></div>
 
 <div class="prob-card sev-high" style="margin-bottom:14px;">
   <div class="prob-header"><span class="prob-icon">⚡</span>
-    <div class="prob-title-wrap"><span class="prob-type">การวิเคราะห์ Total Loss + EV/PV – PEA 67030378 (ห้วยยายจีน)</span>
+    <div class="prob-title-wrap"><span class="prob-type">การวิเคราะห์ Total kWh Loss + EV/PV – PEA 67030378 (ห้วยยายจีน)</span>
     <span class="prob-pea">ข้อมูล พฤษภาคม 2569 | 160 kVA | EV 3 สถานี | PV 3 ชุด</span></div>
     <span class="prob-val">🟢 Median Loss N/A</span></div>
   <div class="prob-body">
@@ -869,10 +869,10 @@ tbody tr:last-child td{border-bottom:none;}
       <ul><li>Loss &lt;5% ด้วย PV offset ช่วยได้</li><li>EV Demand Response ลด Peak Load</li><li>ระบบ PV+EV เป็น Best Practice สำหรับ Smart TTU</li></ul></div>
   </div></div>
 
-<div id="loss-rootcause" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">🔬 สาเหตุที่ทำให้ Total Loss สูง</div>
+<div id="loss-rootcause" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">🔬 สาเหตุที่ทำให้ Total kWh Loss สูง</div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:18px">
   <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #C00000">
-    <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#C00000">🔴 Technical Loss จากหม้อแปลงโหลดสูง</div>
+    <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#C00000">🔴 Total kWh Loss (TL) — หม้อแปลงโหลดสูง</div>
     <div style="font-size:12px;color:#444;line-height:1.6">หม้อแปลง 3 ตัวที่ Overload &gt;100% มี Copper Loss เพิ่มตามกำลังสอง เพิ่ม Technical Loss อย่างมีนัยสำคัญ ควรขยาย kVA ก่อนเป็นอันดับแรก</div>
   </div>
   <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #ED7D31">
@@ -892,7 +892,7 @@ tbody tr:last-child td{border-bottom:none;}
 
 <!-- ═══════════════════════════════════════════════════════ PM PLAN ══ -->
 <div id="pm-plan" class="section-title" style="color:#2E75B6;border-left-color:#2E75B6;margin-top:30px">🔧 แผน Preventive Maintenance (PM) หม้อแปลง</div>
-<p style="font-size:13px;color:#555;margin:8px 0 16px">กำหนดความถี่ PM ตาม Health Score — หม้อแปลง Score ต่ำ (วิกฤต/หมดอายุ) ต้องตรวจสอบบ่อยกว่า ข้อมูลเดือนพฤษภาคม 2569</p>
+<p style="font-size:13px;color:#555;margin:8px 0 16px">กำหนดความถี่ PM ตาม <b>Health Score (0–100)</b> — คำนวณจาก IEC 60076-7 Thermal Life Model โดย <b>Score ต่ำ = อายุเหลือน้อย = ต้องตรวจสอบบ่อยกว่า</b> | ข้อมูลเดือนพฤษภาคม 2569</p>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:18px">
   <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-top:3px solid #2E75B6">
     <div style="font-weight:700;font-size:13px;color:#2E75B6;margin-bottom:8px">🔍 การตรวจวัดทางไฟฟ้า</div>
@@ -938,7 +938,7 @@ tbody tr:last-child td{border-bottom:none;}
 <thead><tr style="background:#2E75B6;color:#fff">
   <th style="padding:9px">PEA No.</th><th style="padding:9px;text-align:left">สถานที่</th>
   <th style="padding:9px">อายุ</th><th style="padding:9px">Max Load%</th>
-  <th style="padding:9px">Health</th><th style="padding:9px">ความถี่ PM</th>
+  <th style="padding:9px">Health Score<br><small style="font-weight:400;font-size:10px">(0–100)</small></th><th style="padding:9px">ความถี่ PM</th>
   <th style="padding:9px;text-align:left">งาน PM หลัก</th>
 </tr></thead>
 <tbody>
@@ -947,7 +947,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">41-005481</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">28 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">88.1%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">0.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#C00000">0</b><span style="font-size:10px;color:#C00000"> 🔴</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -956,7 +956,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">46-007269</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">23 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">90.9%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">8.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#C00000">8</b><span style="font-size:10px;color:#C00000"> 🔴</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -965,7 +965,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">52-011218</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">17 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">154.8%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">16.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#C00000">16</b><span style="font-size:10px;color:#C00000"> 🔴</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Thermal Imaging / Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -974,7 +974,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">48-005133</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">21 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">91.1%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">16.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#C00000">16</b><span style="font-size:10px;color:#C00000"> 🔴</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -983,7 +983,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">54-008867</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">15 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">133.4%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">20.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#C00000">20</b><span style="font-size:10px;color:#C00000"> 🔴</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Thermal Imaging / Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -992,7 +992,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">55-009658</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">14 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">151.8%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">22.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#ED7D31">22</b><span style="font-size:10px;color:#ED7D31"> 🟠</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Thermal Imaging / Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -1001,7 +1001,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">57-012655</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">12 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">163.7%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">26.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#ED7D31">26</b><span style="font-size:10px;color:#ED7D31"> 🟠</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Thermal Imaging / Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -1010,7 +1010,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">51-011192</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">18 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">89.8%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">28.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#ED7D31">28</b><span style="font-size:10px;color:#ED7D31"> 🟠</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -1019,7 +1019,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">50-116368</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">19 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#375623;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">58.6%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">30.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#ED7D31">30</b><span style="font-size:10px;color:#ED7D31"> 🟠</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">IR Test, Winding Resistance</td>
     </tr>
@@ -1028,7 +1028,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">56-013661</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">13 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">115.5%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">32.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#ED7D31">32</b><span style="font-size:10px;color:#ED7D31"> 🟠</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Thermal Imaging / Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -1037,7 +1037,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">51-011832</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">18 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#375623;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">32.8%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">35.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#ED7D31">35</b><span style="font-size:10px;color:#ED7D31"> 🟠</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">IR Test, Winding Resistance</td>
     </tr>
@@ -1046,7 +1046,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">54-014907</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">15 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">92.7%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">40.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#ED7D31">40</b><span style="font-size:10px;color:#ED7D31"> 🟠</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -1055,7 +1055,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">54-014104</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">15 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">82.9%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">40.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#ED7D31">40</b><span style="font-size:10px;color:#ED7D31"> 🟠</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -1064,7 +1064,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">60-010162</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">9 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">100.1%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">42.7</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#F0A500;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#F0A500">43</b><span style="font-size:10px;color:#F0A500"> 🟡</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Thermal Imaging / Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -1073,7 +1073,7 @@ tbody tr:last-child td{border-bottom:none;}
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">66-002351</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">3 ปี</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#C00000;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">134.1%</td>
-      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#ED7D31;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">44.0</td>
+      <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="text-align:center;font-weight:700;color:#F0A500;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px"><b style="font-size:15px;color:#F0A500">44</b><span style="font-size:10px;color:#F0A500"> 🟡</span></td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="font-weight:600;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px">ทุก 3 เดือน</td>
       <td style="padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:12px" style="color:#444;padding:7px 10px;border-bottom:1px solid #f0f0f0;font-size:11px;color:#444">Thermal Imaging / Oil DGA + Moisture / IR Test, Winding Resistance</td>
     </tr>
@@ -1276,10 +1276,10 @@ tbody tr:last-child td{border-bottom:none;}
 </table>
 </div>
 
-<div id="loss-improvement" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">🛠 วิธีการปรับปรุงและลด Total Loss</div>
-<p style="font-size:13px;color:#555;margin:8px 0 16px">แนวทาง 5 ด้านในการลด Total Loss ของหม้อแปลง PEA 59007593 (11.01%) และ 67030378 (N/A) ให้อยู่ในระดับต่ำกว่า 5% อย่างยั่งยืน</p>
+<div id="loss-improvement" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">🛠 วิธีการปรับปรุงและลด Total kWh Loss</div>
+<p style="font-size:13px;color:#555;margin:8px 0 16px">แนวทาง 5 ด้านในการลด Total kWh Loss ของหม้อแปลง PEA 59007593 และ 67030378 ให้อยู่ในระดับต่ำกว่า 5% อย่างยั่งยืน</p>
 <div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #C00000">
-  <div style="font-weight:700;font-size:13px;color:#C00000;margin-bottom:8px">🔍 1. ตรวจสอบ Non-Technical Loss (มิเตอร์ผิดพลาด / ลักลอบใช้ไฟ)</div>
+  <div style="font-weight:700;font-size:13px;color:#C00000;margin-bottom:8px">🔍 1. ตรวจสอบ Total kWh Loss (NTL) — มิเตอร์ผิดพลาด / ลักลอบใช้ไฟ</div>
   <ul style="margin:0;padding-left:18px;font-size:13px;color:#333;line-height:1.7">
     <li>ลงพื้นที่ตรวจสอบมิเตอร์ 14 เครื่องที่ Offline (CR=0%) กระจายใน 6 TTU และตรวจ CT Ratio TX meter 67030378</li>
     <li>เปรียบเทียบค่า Meter Reading กับ Manual ทุก 3 เดือน ตรวจจับมิเตอร์อ่านค่าซ้ำหรือผิดปกติ</li>
@@ -1289,7 +1289,7 @@ tbody tr:last-child td{border-bottom:none;}
   </ul>
 </div>
 <div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #ED7D31">
-  <div style="font-weight:700;font-size:13px;color:#ED7D31;margin-bottom:8px">⚡ 2. ลด Technical Loss ในสายจำหน่าย</div>
+  <div style="font-weight:700;font-size:13px;color:#ED7D31;margin-bottom:8px">⚡ 2. ลด Total kWh Loss (TL) ในสายจำหน่าย</div>
   <ul style="margin:0;padding-left:18px;font-size:13px;color:#333;line-height:1.7">
     <li>ปรับ Tap Position หม้อแปลงให้แรงดันปลายสายอยู่ที่ 220–230V (เฉพาะ 59007593 &amp; 67030378 มีปัญหาแรงดันตก)</li>
     <li>ลดระยะทางสายจำหน่ายหรือเพิ่มขนาดสายในพื้นที่ Under Voltage (56013661 Avg 204.5V)</li>
@@ -1566,6 +1566,74 @@ tbody tr:last-child td{border-bottom:none;}
     </tr></tbody></table></div>
 
 <div id="health-assessment" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">🩺 การประเมินอายุและสุขภาพหม้อแปลง</div>
+
+<!-- Health Score Formula Box -->
+<div style="background:linear-gradient(135deg,#1F3864 0%,#2E75B6 100%);border-radius:12px;padding:20px 24px;margin-bottom:18px;color:#fff;box-shadow:0 4px 16px rgba(31,56,100,.3)">
+  <div style="font-weight:800;font-size:15px;margin-bottom:14px;letter-spacing:.3px">🧮 สูตรคำนวณ Health Score (คะแนนสุขภาพหม้อแปลง)</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:14px">
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:12px 14px">
+      <div style="font-size:11px;color:#a8c4e0;margin-bottom:4px">ขั้นที่ 1 — FAA (Thermal Aging Factor)</div>
+      <div style="font-size:12px;line-height:1.7">
+        โหลด &lt;80% → <b>FAA = 0.8</b> (เสื่อมช้า)<br>
+        โหลด 80–100% → <b>FAA = 1.0</b> (ปกติ)<br>
+        โหลด 100–120% → <b>FAA = 1.5</b> (เสื่อมเร็ว 50%)<br>
+        โหลด &gt;120% → <b>FAA = 2.0</b> (เสื่อมเร็ว 2 เท่า)
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:12px 14px">
+      <div style="font-size:11px;color:#a8c4e0;margin-bottom:4px">ขั้นที่ 2 — อายุเหลือ (IEC 60076-7)</div>
+      <div style="font-size:13px;font-family:monospace;background:rgba(0,0,0,.25);border-radius:6px;padding:8px 10px;margin-top:4px;line-height:1.8">
+        อายุเหลือ =<br>
+        max(0, (25 − อายุจริง) ÷ FAA)
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,.18);border-radius:8px;padding:12px 14px;border:1px solid rgba(255,255,255,.3)">
+      <div style="font-size:11px;color:#a8c4e0;margin-bottom:4px">ขั้นที่ 3 — Health Score (0–100)</div>
+      <div style="font-size:14px;font-family:monospace;background:rgba(0,0,0,.3);border-radius:6px;padding:10px 12px;margin-top:4px;text-align:center;letter-spacing:.5px">
+        <span style="color:#FFD966;font-weight:700">Health Score</span><br>
+        = (อายุเหลือ ÷ 25) × 100
+      </div>
+    </div>
+  </div>
+  <div style="background:rgba(255,255,255,.08);border-radius:8px;padding:10px 14px">
+    <div style="font-size:12px;margin-bottom:8px;font-weight:600;color:#FFD966">📊 ตัวอย่างการคำนวณ</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;font-size:11px">
+      <div>🔵 หม้อแปลง 41005481 (28 ปี, โหลด 88%)<br>&nbsp;&nbsp;FAA=1.0 → อายุเหลือ=(25−28)/1.0=<b>0 ปี</b><br>&nbsp;&nbsp;Health Score = (0÷25)×100 = <span style="color:#FF6B6B;font-weight:700">0 คะแนน 🔴</span></div>
+      <div>🔵 หม้อแปลง 52011218 (17 ปี, โหลด 155%)<br>&nbsp;&nbsp;FAA=2.0 → อายุเหลือ=(25−17)/2.0=<b>4 ปี</b><br>&nbsp;&nbsp;Health Score = (4÷25)×100 = <span style="color:#ED7D31;font-weight:700">16 คะแนน 🟠</span></div>
+      <div>🔵 หม้อแปลง 67021835 (8 ปี, โหลด 62%)<br>&nbsp;&nbsp;FAA=0.8 → อายุเหลือ=(25−8)/0.8=<b>21.3 ปี</b><br>&nbsp;&nbsp;Health Score = (21.3÷25)×100 = <span style="color:#70AD47;font-weight:700">85 คะแนน 🟢</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Health Score Color Scale -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px;text-align:center">
+  <div style="background:#C00000;color:#fff;border-radius:8px;padding:10px 8px">
+    <div style="font-size:20px;font-weight:800">0</div>
+    <div style="font-size:11px;margin-top:2px">คะแนน</div>
+    <div style="font-size:11px;font-weight:600;margin-top:4px">🔴 หมดอายุ</div>
+    <div style="font-size:10px;opacity:.85">เปลี่ยนด่วน</div>
+  </div>
+  <div style="background:#ED7D31;color:#fff;border-radius:8px;padding:10px 8px">
+    <div style="font-size:20px;font-weight:800">1–20</div>
+    <div style="font-size:11px;margin-top:2px">คะแนน</div>
+    <div style="font-size:11px;font-weight:600;margin-top:4px">🟠 วิกฤต</div>
+    <div style="font-size:10px;opacity:.85">PM ทุก 3 เดือน</div>
+  </div>
+  <div style="background:#F0A500;color:#fff;border-radius:8px;padding:10px 8px">
+    <div style="font-size:20px;font-weight:800">21–40</div>
+    <div style="font-size:11px;margin-top:2px">คะแนน</div>
+    <div style="font-size:11px;font-weight:600;margin-top:4px">🟡 เฝ้าระวัง</div>
+    <div style="font-size:10px;opacity:.85">PM ทุก 6 เดือน</div>
+  </div>
+  <div style="background:#70AD47;color:#fff;border-radius:8px;padding:10px 8px">
+    <div style="font-size:20px;font-weight:800">41–100</div>
+    <div style="font-size:11px;margin-top:2px">คะแนน</div>
+    <div style="font-size:11px;font-weight:600;margin-top:4px">🟢 ปกติ</div>
+    <div style="font-size:10px;opacity:.85">PM ปีละ 1 ครั้ง</div>
+  </div>
+</div>
+
+
 
 <div style="background:#fff8f0;border-left:4px solid #ED7D31;border-radius:6px;padding:14px 18px;margin-bottom:18px">
 <div style="font-weight:700;font-size:14px;margin-bottom:8px;color:#843C0C">📐 วิธีคำนวณอายุการใช้งานที่เหลือ (IEC 60076-7 Thermal Life Model)</div>

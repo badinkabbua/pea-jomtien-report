@@ -77,7 +77,7 @@
 
 <div class="topbar">
   <div class="logo">
-    <span class="bolt">⚡</span>
+    <span class="bolt">&#9889;</span>
     <div class="logo-col">
       <span>Smart TTU Report</span>
       <span class="sub">กฟภ. สาขาจอมเทียน</span>
@@ -90,16 +90,16 @@
     <label for="monthPicker">เลือกเดือน :</label>
     <div style="position:relative">
       <select id="monthPicker" onchange="changeMonth(this.value)">
-        <option value="may-2569.html" selected>📅 พฤษภาคม 2569 (ล่าสุด)</option>
-        <option value="april-2569.html">📅 เมษายน 2569</option>
-        <option value="march-2569.html">📅 มีนาคม 2569</option>
+        <option value="may-2569.html" selected>&#128197; พฤษภาคม 2569 (ล่าสุด)</option>
+        <option value="april-2569.html">&#128197; เมษายน 2569</option>
+        <option value="march-2569.html">&#128197; มีนาคม 2569</option>
       </select>
-      <span class="arrow">▼</span>
+      <span class="arrow">&#9660;</span>
     </div>
   </div>
 
   <div class="divider"></div>
-  <span class="badge" id="badge">🗓 พฤษภาคม 2569</span>
+  <span class="badge" id="badge">&#128197; พฤษภาคม 2569</span>
   <div style="flex:1"></div>
   <span style="font-size:11px;color:#475569">PEA Jomtien Smart Grid</span>
 </div>
@@ -112,7 +112,7 @@
 <iframe id="reportFrame"></iframe>
 
 <script>
-const labels = {
+var labelsTH = {
   'may-2569.html':   'พฤษภาคม 2569',
   'april-2569.html': 'เมษายน 2569',
   'march-2569.html': 'มีนาคม 2569'
@@ -121,12 +121,21 @@ var _ts = Date.now();
 function bust(src) { return src + '?t=' + _ts; }
 function changeMonth(src) {
   _ts = Date.now();
+  var name = labelsTH[src] || src;
   document.getElementById('overlay').classList.remove('hidden');
-  document.getElementById('loadText').textContent = 'กำลังโหลด ' + (labels[src]||src) + ' ...';
-  document.getElementById('badge').textContent = '🗓 ' + (labels[src]||src);
+  document.getElementById('loadText').textContent = 'กำลังโหลด ' + name + ' ...';
+  document.getElementById('badge').textContent = '\ud83d\udcc5 ' + name;
   document.getElementById('reportFrame').src = bust(src);
 }
 function hideOverlay() {
   document.getElementById('overlay').classList.add('hidden');
 }
-// 
+// Use addEventListener so hideOverlay is defined before load event fires
+document.getElementById('reportFrame').addEventListener('load', hideOverlay);
+// Fallback: hide overlay after 20s if load event does not fire
+setTimeout(hideOverlay, 20000);
+// Load latest month with cache-busting timestamp
+document.getElementById('reportFrame').src = bust('may-2569.html');
+</script>
+</body>
+</html>

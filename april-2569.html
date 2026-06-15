@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Smart TTU Monthly Report – เมษายน 2569</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"Segoe UI",Arial,sans-serif;background:#f0f4f8;color:#1a2035;line-height:1.5;}
+.sticky-nav{position:sticky;top:0;z-index:100;background:#1F3864;display:flex;gap:0;overflow-x:auto;}
+.sticky-nav a{color:rgba(255,255,255,.75);padding:11px 18px;font-size:.8rem;font-weight:600;text-decoration:none;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s;}
+.sticky-nav a:hover{color:#fff;border-bottom-color:#70AD47;background:rgba(255,255,255,.05);}
+.site-header{background:linear-gradient(135deg,#1F3864 0%,#2E75B6 100%);color:#fff;padding:32px 40px 24px;position:relative;overflow:hidden;}
+.site-header::before{content:"";position:absolute;top:-50px;right:-70px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.05);}
+.site-header h1{font-size:2rem;font-weight:800;letter-spacing:.5px;}
+.site-header .sub{opacity:.82;margin-top:6px;font-size:.95rem;}
+.badge-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+.header-badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 14px;font-size:.82rem;}
+.container{max-width:1440px;margin:0 auto;padding:28px;}
+.section-title{font-size:1.1rem;font-weight:700;color:#1F3864;border-left:4px solid #2E75B6;padding-left:12px;margin:32px 0 16px;display:flex;align-items:center;gap:8px;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;}
+.kpi-card{background:#fff;border-radius:12px;padding:20px 14px 16px;box-shadow:0 2px 12px rgba(0,0,0,.07);border-top:4px solid var(--accent);display:flex;flex-direction:column;align-items:center;text-align:center;}
+.kpi-val{font-size:2.4rem;font-weight:800;color:var(--accent);line-height:1;}
+.kpi-lbl{font-size:.76rem;color:#5a6478;margin-top:6px;font-weight:600;}
+.kpi-sub{font-size:.7rem;color:#8a93a8;margin-top:3px;}
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.chart-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);}
+.chart-card h3{font-size:.9rem;color:#1F3864;margin-bottom:14px;font-weight:700;}
+.chart-wrap{position:relative;}
+@media(max-width:860px){.charts-row{grid-template-columns:1fr;}}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow-x:auto;}
+.card h3{font-size:.9rem;color:#1F3864;margin-bottom:14px;font-weight:700;}
+table{width:100%;border-collapse:collapse;font-size:.82rem;}
+th{background:#1F3864;color:#fff;padding:9px 10px;text-align:center;font-weight:600;white-space:nowrap;}
+td{padding:8px 10px;border-bottom:1px solid #edf0f5;text-align:center;vertical-align:middle;}
+.loc-cell{text-align:left;max-width:190px;}
+.pea-no{font-weight:600;color:#1F3864;font-size:.8rem;}
+.num-col{font-weight:700;font-size:.95rem;}
+tr:hover td{background:#f5f8ff;}
+.badge,.status-badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:.73rem;font-weight:700;white-space:nowrap;}
+.badge.critical,.status-badge.offline{background:#fde8e8;color:#c00000;}
+.badge.high{background:#fce4d6;color:#843c0c;}
+.badge.warn{background:#fef2cc;color:#8a6514;}
+.badge.info{background:#dceefb;color:#1F3864;}
+.status-badge.online{background:#e2f0d9;color:#375623;}
+.bar-wrap{background:#e9ecf0;border-radius:4px;height:8px;width:90px;display:inline-block;vertical-align:middle;margin-right:6px;}
+.bar-fill{height:100%;border-radius:4px;}
+.bar-fill.critical{background:#c00000;}.bar-fill.high{background:#ed7d31;}.bar-fill.warn{background:#ffd966;}
+.pct-label{font-weight:700;font-size:.8rem;}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;}
+.donut-center .big{font-size:2rem;font-weight:800;color:#1F3864;}
+.donut-center .sm{font-size:.72rem;color:#5a6478;font-weight:600;}
+.prob-section{display:flex;flex-direction:column;gap:14px;}
+.prob-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow:hidden;border-left:5px solid #ccc;}
+.prob-card.sev-critical{border-left-color:#c00000;}
+.prob-card.sev-high{border-left-color:#ed7d31;}
+.prob-card.sev-warn{border-left-color:#ffd966;}
+.prob-header{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#fafbfc;border-bottom:1px solid #edf0f5;flex-wrap:wrap;}
+.prob-icon{font-size:1.4rem;}
+.prob-title-wrap{flex:1;min-width:150px;}
+.prob-type{font-weight:700;color:#1F3864;font-size:.95rem;display:block;}
+.prob-pea{font-size:.78rem;color:#5a6478;}
+.prob-val{font-weight:700;font-size:.92rem;white-space:nowrap;}
+.sev-critical .prob-val{color:#c00000;}
+.sev-high .prob-val{color:#ed7d31;}
+.sev-warn .prob-val{color:#8a6514;}
+.prob-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+@media(max-width:860px){.prob-body{grid-template-columns:1fr;}}
+.prob-cause,.prob-fix{padding:14px 18px;}
+.prob-cause{border-right:1px solid #edf0f5;background:#fffdf9;}
+.prob-fix{background:#f6fff6;}
+.prob-result{background:#f0f7ff;padding:14px 18px;border-left:1px solid #edf0f5;}
+.prob-result .label-tag{background:#2E75B6;}
+.prob-result ul{margin:4px 0 0;padding-left:16px;font-size:.82rem;color:#1a3a6e;line-height:1.75;}
+.label-tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:10px;margin-bottom:7px;background:#1F3864;color:#fff;}
+.prob-cause p{font-size:.83rem;color:#444;line-height:1.6;}
+.prob-fix ul{list-style:none;padding:0;}
+.prob-fix li{font-size:.83rem;color:#2d4a2d;padding:3px 0 3px 18px;position:relative;line-height:1.5;}
+.prob-fix li::before{content:"✓";position:absolute;left:0;color:#70AD47;font-weight:700;}
+.summary-table th{background:#2E75B6;}
+.timeline{position:relative;padding-left:30px;}
+.timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:#d1d9e6;}
+.timeline-item{position:relative;margin-bottom:22px;}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px #ccc;}
+.timeline-item.sev-critical .tl-dot{background:#c00000;box-shadow:0 0 0 2px #c00000;}
+.timeline-item.sev-high .tl-dot{background:#ed7d31;box-shadow:0 0 0 2px #ed7d31;}
+.timeline-item.sev-warn .tl-dot{background:#ffd966;box-shadow:0 0 0 2px #ffd966;}
+.timeline-item.sev-info .tl-dot{background:#2E75B6;box-shadow:0 0 0 2px #2E75B6;}
+.tl-title{font-weight:700;font-size:.95rem;color:#1F3864;margin-bottom:6px;}
+.tl-content ul{list-style:none;padding:0;}
+.tl-content li{font-size:.83rem;color:#444;padding:4px 0 4px 18px;position:relative;border-bottom:1px solid #edf0f5;line-height:1.5;}
+.tl-content li::before{content:"→";position:absolute;left:0;color:#2E75B6;font-weight:700;}
+.footer{text-align:center;padding:28px;font-size:.78rem;color:#8a93a8;}
+.loss-kpi-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;}
+.loss-kpi{background:#f5f8ff;border-radius:10px;padding:12px 14px;text-align:center;flex:1;min-width:80px;}
+.lkv{font-size:1.5rem;font-weight:800;line-height:1;}
+.lkl{font-size:.72rem;color:#5a6478;margin-top:4px;font-weight:600;line-height:1.3;}
+.ev-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #edf0f5;font-size:.8rem;}
+</style>
+</head>
+<body>
+
+<nav class="sticky-nav">
+  <a href="#kpi-ttu">🔌 KPI TTU</a>
+  <a href="#kpi-meter">📟 KPI Meter</a>
+  <a href="#charts">📈 กราฟ</a>
+  <a href="#analysis">🔍 วิเคราะห์ปัญหา</a>
+  <a href="#timeline">🗓 แผนแก้ไข</a>
+  <a href="#expected-results">🎯 ผลที่คาดหวัง</a>
+  <a href="#loss-analysis">📊 Total Loss</a>
+  <a href="#loss-rootcause">🔬 สาเหตุ Loss</a>
+  <a href="#pm-plan">🔧 แผน PM</a>
+  <a href="#export-meters">☀️ Export Meter</a>
+  <a href="#loss-improvement">🛠 ปรับปรุง Loss</a>
+  <a href="#voltage-fix">⚡ แก้ไข Voltage</a>
+  <a href="#expansion-plan">📦 ขยาย kVA</a>
+  <a href="#health-assessment">🩺 อายุหม้อแปลง</a>
+  <a href="#evpv-plan">🚗 EV/PV</a>
+  <a href="#collection-rate">📡 Collection Rate</a>
+  <a href="#detail-tables">📋 ตารางรายละเอียด</a>
+</nav>
+
+<header class="site-header">
+  <h1>⚡ Smart TTU Monthly Report</h1>
+  <p class="sub">กฟภ. สาขาจอมเทียน &nbsp;|&nbsp; เดือนเมษายน 2569</p>
+  <div class="badge-row">
+    <span class="header-badge">📅 เม.ย. 2569</span>
+    <span class="header-badge">🔌 TTU 40 หน่วย</span>
+    <span class="header-badge">📊 Meter 400 เครื่อง</span>
+    <span class="header-badge">🔴 P1 เร่งด่วน: 7 รายการ</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- KPI TTU -->
+<div id="kpi-ttu" class="section-title">🔌 KPI หม้อแปลงไฟฟ้า (TTU)</div>
+<div class="kpi-grid">
+  <div class="kpi-card" style="--accent:#1F3864"><div class="kpi-val">40</div><div class="kpi-lbl">TTU ทั้งหมด</div></div>
+  <div class="kpi-card" style="--accent:#70AD47"><div class="kpi-val">37</div><div class="kpi-lbl">Online</div><div class="kpi-sub">92.5%</div></div>
+  <div class="kpi-card" style="--accent:#C00000"><div class="kpi-val">3</div><div class="kpi-lbl">Offline</div><div class="kpi-sub">7.5%</div></div>
+  <div class="kpi-card" style="--accent:#ED7D31"><div class="kpi-val">3</div><div class="kpi-lbl">Overload &gt;100%</div></div>
+  <div class="kpi-card" style="--accent:#843C0C"><div class="kpi-val">8</div><div class="kpi-lbl">Overload 80–100%</div></div>
+  <div class="kpi-card" style="--accent:#FFD966"><div class="kpi-val" style="color:#8a6514">37</div><div class="kpi-lbl" style="color:#8a6514">Phase Unbalance &gt;10%</div></div>
+  <div class="kpi-card" style="--accent:#2E75B6"><div class="kpi-val">2</div><div class="kpi-lbl">TTU Under Voltage</div></div>
+  <div class="kpi-card" style="--accent:#843C0C"><div class="kpi-val">1</div><div class="kpi-lbl">TTU Over Voltage</div></div>
+</div>
+
+<!-- KPI Meter -->
+<div id="kpi-meter" class="section-title">📟 KPI มิเตอร์ (Smart Meter)</div>
+<div class="kpi-grid">
+  <div class="kpi-card" style="--accent:#1F3864"><div class="kpi-val">400</div><div class="kpi-lbl">มิเตอร์ในระบบ</div></div>
+  <div class="kpi-card" style="--accent:#70AD47"><div class="kpi-val">369</div><div class="kpi-lbl">Online</div><div class="kpi-sub">92.25%</div></div>
+  <div class="kpi-card" style="--accent:#8a93a8"><div class="kpi-val" style="color:#595959">31</div><div class="kpi-lbl" style="color:#595959">Offline</div><div class="kpi-sub">7.75%</div></div>
+  <div class="kpi-card" style="--accent:#375623"><div class="kpi-val">338</div><div class="kpi-lbl">Collection Rate ≥90%</div><div class="kpi-sub">84.5%</div></div>
+  <div class="kpi-card" style="--accent:#ED7D31"><div class="kpi-val">1</div><div class="kpi-lbl">Collection Rate 80–89%</div><div class="kpi-sub">0.25%</div></div>
+  <div class="kpi-card" style="--accent:#C00000"><div class="kpi-val">31</div><div class="kpi-lbl">Collection Rate &lt;80%</div><div class="kpi-sub">7.75%</div></div>
+</div>
+
+<!-- CHARTS -->
+<div id="charts" class="section-title">📈 กราฟวิเคราะห์</div>
+<div class="charts-row">
+  <div class="chart-card"><h3>สัดส่วนสถานะ TTU</h3>
+    <div class="chart-wrap" style="height:220px">
+      <canvas id="ttuDonut"></canvas>
+      <div class="donut-center"><div class="big">40</div><div class="sm">TTU</div></div>
+    </div></div>
+  <div class="chart-card"><h3>สัดส่วนสถานะมิเตอร์ (400 เครื่อง)</h3>
+    <div class="chart-wrap" style="height:220px">
+      <canvas id="meterDonut"></canvas>
+      <div class="donut-center"><div class="big">400</div><div class="sm">Meters</div></div>
+    </div></div>
+</div>
+<div style="height:14px"></div>
+<div class="charts-row">
+  <div class="chart-card"><h3>Loading % ต่อ TTU (Top 15 Online)</h3>
+    <div class="chart-wrap" style="height:300px"><canvas id="loadBar"></canvas></div></div>
+  <div class="chart-card"><h3>แรงดัน TTU – Min/Avg/Max (V)</h3>
+    <div class="chart-wrap" style="height:300px"><canvas id="voltageBar"></canvas></div></div>
+</div>
+
+<!-- PROBLEM ANALYSIS -->
+<div id="analysis" class="section-title">🔍 การวิเคราะห์ปัญหาและแนวทางแก้ไข</div>
+<div class="card" style="margin-bottom:20px">
+  <h3>📊 สรุปปัญหาทั้งหมด (เดือนเมษายน 2569)</h3>
+  <table class="summary-table">
+    <thead><tr><th>ลำดับความเร่งด่วน</th><th>ประเภทปัญหา</th><th>จำนวน</th><th>สาเหตุหลัก</th><th>แนวทางแก้ไข</th></tr></thead>
+    <tbody>
+    <tr><td><span class="badge critical">P1</span></td><td>🔴 TTU Offline</td><td class="num-col">3</td><td class="loc-cell">ขาดการเชื่อมต่อ (ยังไม่ได้แก้ไขจากเดือน มี.ค.)</td><td class="loc-cell">เร่งส่งช่างภายใน 24 ชม.</td></tr>
+    <tr><td><span class="badge critical">P1</span></td><td>🔴 Overload &gt;100%</td><td class="num-col">3</td><td class="loc-cell">โหลดเกินพิกัดวิกฤต (55009658 ใหม่ 124.4%)</td><td class="loc-cell">เปลี่ยน/เพิ่มหม้อแปลงเร่งด่วน</td></tr>
+    <tr><td><span class="badge critical">P1</span></td><td>🔴 Voltage Anomaly</td><td class="num-col">1</td><td class="loc-cell">แรงดันผิดปกติรุนแรง 157–278V (52011218)</td><td class="loc-cell">ตรวจสอบ Tap/CT/PT เร่งด่วน</td></tr>
+    <tr><td><span class="badge high">P2</span></td><td>🟠 Overload 80–100%</td><td class="num-col">8</td><td class="loc-cell">โหลดใกล้เต็มพิกัด ฤดูร้อน</td><td class="loc-cell">วางแผนขยายภายใน 3 เดือน</td></tr>
+    <tr><td><span class="badge warn">P3</span></td><td>🟡 Loading ใกล้ 80%</td><td class="num-col">4</td><td class="loc-cell">โหลดเพิ่มใน Peak hour</td><td class="loc-cell">ติดตาม + วางแผนรองรับ</td></tr>
+    <tr><td><span class="badge warn">P3</span></td><td>🟡 Meter Offline</td><td class="num-col">31</td><td class="loc-cell">สัญญาณขาด / อุปกรณ์ชำรุด</td><td class="loc-cell">ตรวจสอบและซ่อมแซม</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- P1 Section -->
+<div class="section-title" style="color:#c00000;border-left-color:#c00000;margin-top:20px">
+  🔴 ปัญหาเร่งด่วน (P1) – ต้องดำเนินการทันที (7 รายการ)
+</div>
+<div class="prob-section">
+  <div class="prob-card sev-critical">
+    <div class="prob-header"><span class="prob-icon">📡</span>
+      <div class="prob-title-wrap"><span class="prob-type">TTU Offline (ยังไม่ได้แก้ไขจาก มี.ค.)</span><span class="prob-pea">PEA 65005572 – ก่อนถึงซอยจอมเทียน 13</span></div>
+      <span class="prob-val">🔴 Offline</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>ขาดการเชื่อมต่อสัญญาณต่อเนื่อง &gt;2 เดือน / ไฟเลี้ยงอุปกรณ์ขัดข้อง / เซ็นเซอร์ CT/PT ชำรุด</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>เร่งส่งช่างตรวจสอบทันที (เกินกำหนด 2 เดือนแล้ว)</li><li>ตรวจสอบ Fuse, Power Supply และการเชื่อมต่อ SIM/Antenna</li><li>ถ้าอุปกรณ์เสียหายให้เปลี่ยนและ Commissioning ใหม่</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>หม้อแปลงกลับมา Online ส่งข้อมูลครบ</li><li>ลดความเสี่ยง Power Outage โดยไม่ทราบสาเหตุ</li><li>ข้อมูล Loading/Voltage ครบสำหรับวิเคราะห์</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-critical">
+    <div class="prob-header"><span class="prob-icon">📡</span>
+      <div class="prob-title-wrap"><span class="prob-type">TTU Offline (ยังไม่ได้แก้ไขจาก มี.ค.)</span><span class="prob-pea">PEA 51011192 – จอมเทียนซอย 9</span></div>
+      <span class="prob-val">🔴 Offline</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>ขาดการเชื่อมต่อสัญญาณต่อเนื่อง &gt;2 เดือน / ไฟเลี้ยงอุปกรณ์ขัดข้อง / เซ็นเซอร์ CT/PT ชำรุด</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>เร่งส่งช่างตรวจสอบทันที (เกินกำหนด 2 เดือนแล้ว)</li><li>ตรวจสอบ Fuse, Power Supply และการเชื่อมต่อ SIM/Antenna</li><li>ถ้าอุปกรณ์เสียหายให้เปลี่ยนและ Commissioning ใหม่</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>หม้อแปลงกลับมา Online ส่งข้อมูลครบ</li><li>ลดความเสี่ยง Power Outage โดยไม่ทราบสาเหตุ</li><li>ข้อมูล Loading/Voltage ครบสำหรับวิเคราะห์</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-critical">
+    <div class="prob-header"><span class="prob-icon">📡</span>
+      <div class="prob-title-wrap"><span class="prob-type">TTU Offline (ยังไม่ได้แก้ไขจาก มี.ค.)</span><span class="prob-pea">PEA 53005322 – ก่อนวัดบุญกัจนาซอย 3</span></div>
+      <span class="prob-val">🔴 Offline</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>ขาดการเชื่อมต่อสัญญาณต่อเนื่อง &gt;2 เดือน / ไฟเลี้ยงอุปกรณ์ขัดข้อง / เซ็นเซอร์ CT/PT ชำรุด</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>เร่งส่งช่างตรวจสอบทันที (เกินกำหนด 2 เดือนแล้ว)</li><li>ตรวจสอบ Fuse, Power Supply และการเชื่อมต่อ SIM/Antenna</li><li>ถ้าอุปกรณ์เสียหายให้เปลี่ยนและ Commissioning ใหม่</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>หม้อแปลงกลับมา Online ส่งข้อมูลครบ</li><li>ลดความเสี่ยง Power Outage โดยไม่ทราบสาเหตุ</li><li>ข้อมูล Loading/Voltage ครบสำหรับวิเคราะห์</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-critical">
+    <div class="prob-header"><span class="prob-icon">⚡</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload &gt;100%</span><span class="prob-pea">PEA 55009658 – วินล่านาวิน (160 kVA)</span></div>
+      <span class="prob-val">🔴 124.4%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>NEW – เพิ่มขึ้นจาก 82.3% เป็น 124.4% ในเดือนเดียว<br>โหลดเพิ่มในฤดูร้อน (เมษายน) ทำให้ความต้องการพลังงานพุ่งสูง AC, ปั๊มน้ำ, และแหล่งท่องเที่ยวเพิ่มโหลด</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>เร่งขยายขนาดหม้อแปลงหรือติดตั้งหม้อแปลงเพิ่มภายใน 1 เดือน</li><li>ตรวจสอบ Demand สูงสุดย้อนหลัง 6 เดือน เพื่อกำหนดขนาดที่เหมาะสม</li><li>โอนโหลดบางส่วนไปยังหม้อแปลงใกล้เคียงชั่วคราว</li><li>ติดตาม Loading % ทุกวันจนกว่าจะขยาย</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % ลดต่ำกว่า 80% หลังขยาย kVA</li><li>อุณหภูมิขดลวดลดลง ยืดอายุหม้อแปลง 3–5 ปี</li><li>ลดความเสี่ยงหม้อแปลงชำรุดกะทันหัน</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-critical">
+    <div class="prob-header"><span class="prob-icon">⚡</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload &gt;100%</span><span class="prob-pea">PEA 54008867 – หน้า NP Hotel ซอยไฮโซโอเทว (160 kVA)</span></div>
+      <span class="prob-val">🔴 108.5%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>ยังคงเกินพิกัด ต่อเนื่องจากเดือน มี.ค. (เดิม 110.6%)<br>โหลดเพิ่มในฤดูร้อน (เมษายน) ทำให้ความต้องการพลังงานพุ่งสูง AC, ปั๊มน้ำ, และแหล่งท่องเที่ยวเพิ่มโหลด</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>เร่งขยายขนาดหม้อแปลงหรือติดตั้งหม้อแปลงเพิ่มภายใน 1 เดือน</li><li>ตรวจสอบ Demand สูงสุดย้อนหลัง 6 เดือน เพื่อกำหนดขนาดที่เหมาะสม</li><li>โอนโหลดบางส่วนไปยังหม้อแปลงใกล้เคียงชั่วคราว</li><li>ติดตาม Loading % ทุกวันจนกว่าจะขยาย</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % ลดต่ำกว่า 80% หลังขยาย kVA</li><li>อุณหภูมิขดลวดลดลง ยืดอายุหม้อแปลง 3–5 ปี</li><li>ลดความเสี่ยงหม้อแปลงชำรุดกะทันหัน</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-critical">
+    <div class="prob-header"><span class="prob-icon">⚡</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload &gt;100%</span><span class="prob-pea">PEA 67030375 – ตรงข้ามพัทยาเมืองใหม่ ชัยพฤษย์ 2 (160 kVA)</span></div>
+      <span class="prob-val">🔴 104.9%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>ยังคงเกินพิกัด ต่อเนื่องจากเดือน มี.ค. (เดิม 106.5%)<br>โหลดเพิ่มในฤดูร้อน (เมษายน) ทำให้ความต้องการพลังงานพุ่งสูง AC, ปั๊มน้ำ, และแหล่งท่องเที่ยวเพิ่มโหลด</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>เร่งขยายขนาดหม้อแปลงหรือติดตั้งหม้อแปลงเพิ่มภายใน 1 เดือน</li><li>ตรวจสอบ Demand สูงสุดย้อนหลัง 6 เดือน เพื่อกำหนดขนาดที่เหมาะสม</li><li>โอนโหลดบางส่วนไปยังหม้อแปลงใกล้เคียงชั่วคราว</li><li>ติดตาม Loading % ทุกวันจนกว่าจะขยาย</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % ลดต่ำกว่า 80% หลังขยาย kVA</li><li>อุณหภูมิขดลวดลดลง ยืดอายุหม้อแปลง 3–5 ปี</li><li>ลดความเสี่ยงหม้อแปลงชำรุดกะทันหัน</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-critical">
+    <div class="prob-header"><span class="prob-icon">⚡</span>
+      <div class="prob-title-wrap"><span class="prob-type">Voltage Anomaly (รุนแรง)</span><span class="prob-pea">PEA 52011218 – หน้าวัดทุ่งระหาร (315 kVA)</span></div>
+      <span class="prob-val">🔴 Min 157.2V / Max 278.8V</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>แรงดันสวิงรุนแรง 157–278V (ปกติ 207–253V): อาจเกิดจาก CT/PT ชำรุด, Tap หม้อแปลงผิดปกติ, Single-phase fault, หรือปัญหาการวัดค่า (Sensor Error). Loading ในเดือนนี้ 76.4% (ลดลงจาก 93.8% มี.ค.)</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>ส่งช่างตรวจสอบ CT/PT Ratio และ Tap Changer เร่งด่วน</li><li>ตรวจสอบข้อมูล Sensor และ Data Logger ว่าค่าผิดปกติจริงหรือ Measurement Error</li><li>ตรวจแรงดัน 3 เฟสด้วย Power Quality Analyzer</li><li>ติดตาม Voltage ต่อเนื่อง 7 วัน หลังแก้ไข</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>แรงดันอยู่ในช่วงปกติ 207–253V</li><li>ลดความเสียหายต่ออุปกรณ์ผู้ใช้ไฟ</li><li>ข้อมูลแรงดันถูกต้องสำหรับการวิเคราะห์</li></ul></div>
+    </div></div>
+</div>
+
+<div class="section-title" style="color:#ed7d31;border-left-color:#ed7d31;margin-top:24px">
+  🟠 ปัญหาสำคัญ (P2) – ดำเนินการภายใน 1 เดือน (8 รายการ)
+</div>
+<div class="prob-section">
+  <div class="prob-card sev-high">
+    <div class="prob-header"><span class="prob-icon">⚠️</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload 80–100%</span><span class="prob-pea">PEA 57012655 – บ้านสวนเนรมิตร (250 kVA)</span></div>
+      <span class="prob-val">🟠 92.6%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดใกล้เต็มพิกัด: แนวโน้มเพิ่มขึ้นในช่วง Peak hour / ฤดูร้อน เมษายน มีความต้องการ AC สูงสุดของปี</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>วางแผนขยายขนาดหม้อแปลงภายใน 3 เดือน</li><li>ติดตาม Loading % ทุกสัปดาห์</li><li>สำรวจโหลดใหม่ที่จะเชื่อมต่อเพิ่ม</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % อยู่ในช่วงปลอดภัย (&lt;80%) หลังขยาย</li><li>ลดความร้อนสะสมในหม้อแปลงช่วง Peak Load</li><li>ลดความเสี่ยงเมื่อโหลดเพิ่มในอนาคต</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-high">
+    <div class="prob-header"><span class="prob-icon">⚠️</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload 80–100%</span><span class="prob-pea">PEA 56013661 – ปากซอยหนองหิน (200 kVA)</span></div>
+      <span class="prob-val">🟠 84.9%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดใกล้เต็มพิกัด: แนวโน้มเพิ่มขึ้นในช่วง Peak hour / ฤดูร้อน เมษายน มีความต้องการ AC สูงสุดของปี</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>วางแผนขยายขนาดหม้อแปลงภายใน 3 เดือน</li><li>ติดตาม Loading % ทุกสัปดาห์</li><li>สำรวจโหลดใหม่ที่จะเชื่อมต่อเพิ่ม</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % อยู่ในช่วงปลอดภัย (&lt;80%) หลังขยาย</li><li>ลดความร้อนสะสมในหม้อแปลงช่วง Peak Load</li><li>ลดความเสี่ยงเมื่อโหลดเพิ่มในอนาคต</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-high">
+    <div class="prob-header"><span class="prob-icon">⚠️</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload 80–100%</span><span class="prob-pea">PEA 54014907 – ซอยจอมเทียน 13 (160 kVA)</span></div>
+      <span class="prob-val">🟠 84.4%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดใกล้เต็มพิกัด: แนวโน้มเพิ่มขึ้นในช่วง Peak hour / ฤดูร้อน เมษายน มีความต้องการ AC สูงสุดของปี</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>วางแผนขยายขนาดหม้อแปลงภายใน 3 เดือน</li><li>ติดตาม Loading % ทุกสัปดาห์</li><li>สำรวจโหลดใหม่ที่จะเชื่อมต่อเพิ่ม</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % อยู่ในช่วงปลอดภัย (&lt;80%) หลังขยาย</li><li>ลดความร้อนสะสมในหม้อแปลงช่วง Peak Load</li><li>ลดความเสี่ยงเมื่อโหลดเพิ่มในอนาคต</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-high">
+    <div class="prob-header"><span class="prob-icon">⚠️</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload 80–100%</span><span class="prob-pea">PEA 67021835 – ซอยหนองปลาไหล (200 kVA)</span></div>
+      <span class="prob-val">🟠 84.1%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดใกล้เต็มพิกัด: แนวโน้มเพิ่มขึ้นในช่วง Peak hour / ฤดูร้อน เมษายน มีความต้องการ AC สูงสุดของปี</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>วางแผนขยายขนาดหม้อแปลงภายใน 3 เดือน</li><li>ติดตาม Loading % ทุกสัปดาห์</li><li>สำรวจโหลดใหม่ที่จะเชื่อมต่อเพิ่ม</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % อยู่ในช่วงปลอดภัย (&lt;80%) หลังขยาย</li><li>ลดความร้อนสะสมในหม้อแปลงช่วง Peak Load</li><li>ลดความเสี่ยงเมื่อโหลดเพิ่มในอนาคต</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-high">
+    <div class="prob-header"><span class="prob-icon">⚠️</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload 80–100%</span><span class="prob-pea">PEA 54014104 – หน้าวัดทุ่งกลม (160 kVA)</span></div>
+      <span class="prob-val">🟠 81.7%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดใกล้เต็มพิกัด: แนวโน้มเพิ่มขึ้นในช่วง Peak hour / ฤดูร้อน เมษายน มีความต้องการ AC สูงสุดของปี</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>วางแผนขยายขนาดหม้อแปลงภายใน 3 เดือน</li><li>ติดตาม Loading % ทุกสัปดาห์</li><li>สำรวจโหลดใหม่ที่จะเชื่อมต่อเพิ่ม</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % อยู่ในช่วงปลอดภัย (&lt;80%) หลังขยาย</li><li>ลดความร้อนสะสมในหม้อแปลงช่วง Peak Load</li><li>ลดความเสี่ยงเมื่อโหลดเพิ่มในอนาคต</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-high">
+    <div class="prob-header"><span class="prob-icon">⚠️</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload 80–100%</span><span class="prob-pea">PEA 66002351 – ซอยหนองกระบอก (250 kVA)</span></div>
+      <span class="prob-val">🟠 81.7%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดใกล้เต็มพิกัด: แนวโน้มเพิ่มขึ้นในช่วง Peak hour / ฤดูร้อน เมษายน มีความต้องการ AC สูงสุดของปี</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>วางแผนขยายขนาดหม้อแปลงภายใน 3 เดือน</li><li>ติดตาม Loading % ทุกสัปดาห์</li><li>สำรวจโหลดใหม่ที่จะเชื่อมต่อเพิ่ม</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % อยู่ในช่วงปลอดภัย (&lt;80%) หลังขยาย</li><li>ลดความร้อนสะสมในหม้อแปลงช่วง Peak Load</li><li>ลดความเสี่ยงเมื่อโหลดเพิ่มในอนาคต</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-high">
+    <div class="prob-header"><span class="prob-icon">⚠️</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload 80–100%</span><span class="prob-pea">PEA 46007269 – นาจอมเทียนซอย 6 (200 kVA)</span></div>
+      <span class="prob-val">🟠 81.3%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดใกล้เต็มพิกัด: แนวโน้มเพิ่มขึ้นในช่วง Peak hour / ฤดูร้อน เมษายน มีความต้องการ AC สูงสุดของปี</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>วางแผนขยายขนาดหม้อแปลงภายใน 3 เดือน</li><li>ติดตาม Loading % ทุกสัปดาห์</li><li>สำรวจโหลดใหม่ที่จะเชื่อมต่อเพิ่ม</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % อยู่ในช่วงปลอดภัย (&lt;80%) หลังขยาย</li><li>ลดความร้อนสะสมในหม้อแปลงช่วง Peak Load</li><li>ลดความเสี่ยงเมื่อโหลดเพิ่มในอนาคต</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-high">
+    <div class="prob-header"><span class="prob-icon">⚠️</span>
+      <div class="prob-title-wrap"><span class="prob-type">Overload 80–100%</span><span class="prob-pea">PEA 48005133 – ซอยจอมเทียน 6 (160 kVA)</span></div>
+      <span class="prob-val">🟠 80.5%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดใกล้เต็มพิกัด: แนวโน้มเพิ่มขึ้นในช่วง Peak hour / ฤดูร้อน เมษายน มีความต้องการ AC สูงสุดของปี</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>วางแผนขยายขนาดหม้อแปลงภายใน 3 เดือน</li><li>ติดตาม Loading % ทุกสัปดาห์</li><li>สำรวจโหลดใหม่ที่จะเชื่อมต่อเพิ่ม</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % อยู่ในช่วงปลอดภัย (&lt;80%) หลังขยาย</li><li>ลดความร้อนสะสมในหม้อแปลงช่วง Peak Load</li><li>ลดความเสี่ยงเมื่อโหลดเพิ่มในอนาคต</li></ul></div>
+    </div></div>
+</div>
+
+<div class="section-title" style="color:#8a6514;border-left-color:#ffd966;margin-top:24px">
+  🟡 ปัญหาเฝ้าระวัง (P3) – ติดตามต่อเนื่อง
+</div>
+<div class="prob-section">
+  <div class="prob-card sev-warn">
+    <div class="prob-header"><span class="prob-icon">📉</span>
+      <div class="prob-title-wrap"><span class="prob-type">Loading ใกล้ขีดจำกัด 80%</span><span class="prob-pea">PEA 41005481 – ซอยจอมเทียน 4 (160 kVA)</span></div>
+      <span class="prob-val">🟡 80.0%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดเพิ่มขึ้นใน Peak load ช่วงเมษายน ฤดูร้อน หากโหลดยังเพิ่มต่อเนื่องจะข้ามเข้า P2 ในเดือนถัดไป</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>ติดตาม Loading % ทุกสัปดาห์</li><li>เตรียมแผน Design หม้อแปลงใหม่ล่วงหน้า</li><li>ตรวจสอบโหลดใหม่ที่อาจเพิ่มในพื้นที่</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % ไม่เกิน 80% ตลอดทั้งปี</li><li>มีแผนรองรับก่อนเกิดปัญหา</li><li>ลดความเสี่ยงหม้อแปลงเสียหายจากความร้อน</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-warn">
+    <div class="prob-header"><span class="prob-icon">📉</span>
+      <div class="prob-title-wrap"><span class="prob-type">Loading ใกล้ขีดจำกัด 80%</span><span class="prob-pea">PEA 64004633 – แกล้มลิง (100 kVA)</span></div>
+      <span class="prob-val">🟡 79.2%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดเพิ่มขึ้นใน Peak load ช่วงเมษายน ฤดูร้อน หากโหลดยังเพิ่มต่อเนื่องจะข้ามเข้า P2 ในเดือนถัดไป</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>ติดตาม Loading % ทุกสัปดาห์</li><li>เตรียมแผน Design หม้อแปลงใหม่ล่วงหน้า</li><li>ตรวจสอบโหลดใหม่ที่อาจเพิ่มในพื้นที่</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % ไม่เกิน 80% ตลอดทั้งปี</li><li>มีแผนรองรับก่อนเกิดปัญหา</li><li>ลดความเสี่ยงหม้อแปลงเสียหายจากความร้อน</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-warn">
+    <div class="prob-header"><span class="prob-icon">📉</span>
+      <div class="prob-title-wrap"><span class="prob-type">Loading ใกล้ขีดจำกัด 80%</span><span class="prob-pea">PEA 63010844 – หน้าทะเลเผา (200 kVA)</span></div>
+      <span class="prob-val">🟡 79.1%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดเพิ่มขึ้นใน Peak load ช่วงเมษายน ฤดูร้อน หากโหลดยังเพิ่มต่อเนื่องจะข้ามเข้า P2 ในเดือนถัดไป</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>ติดตาม Loading % ทุกสัปดาห์</li><li>เตรียมแผน Design หม้อแปลงใหม่ล่วงหน้า</li><li>ตรวจสอบโหลดใหม่ที่อาจเพิ่มในพื้นที่</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % ไม่เกิน 80% ตลอดทั้งปี</li><li>มีแผนรองรับก่อนเกิดปัญหา</li><li>ลดความเสี่ยงหม้อแปลงเสียหายจากความร้อน</li></ul></div>
+    </div></div>
+  <div class="prob-card sev-warn">
+    <div class="prob-header"><span class="prob-icon">📉</span>
+      <div class="prob-title-wrap"><span class="prob-type">Loading ใกล้ขีดจำกัด 80%</span><span class="prob-pea">PEA 68000879 – หน้าร้านเอแคลร์โมบาย (200 kVA)</span></div>
+      <span class="prob-val">🟡 79.0%</span></div>
+    <div class="prob-body">
+      <div class="prob-cause"><span class="label-tag">🔍 สาเหตุที่น่าจะเป็น</span>
+        <p>โหลดเพิ่มขึ้นใน Peak load ช่วงเมษายน ฤดูร้อน หากโหลดยังเพิ่มต่อเนื่องจะข้ามเข้า P2 ในเดือนถัดไป</p></div>
+      <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+        <ul><li>ติดตาม Loading % ทุกสัปดาห์</li><li>เตรียมแผน Design หม้อแปลงใหม่ล่วงหน้า</li><li>ตรวจสอบโหลดใหม่ที่อาจเพิ่มในพื้นที่</li></ul></div>
+      <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+        <ul><li>Loading % ไม่เกิน 80% ตลอดทั้งปี</li><li>มีแผนรองรับก่อนเกิดปัญหา</li><li>ลดความเสี่ยงหม้อแปลงเสียหายจากความร้อน</li></ul></div>
+    </div></div>
+</div>
+
+<div id="timeline" class="section-title">🗓 แผนปฏิบัติการแก้ไข (Action Plan)</div>
+<div class="card"><div class="timeline">
+  <div class="timeline-item sev-critical">
+    <div class="tl-dot"></div>
+    <div class="tl-content">
+      <div class="tl-title">ทันที (0–7 วัน)</div>
+      <ul>
+        <li>เร่งส่งช่างตรวจสอบ TTU Offline ที่ค้างนาน 2 เดือน: 65005572, 51011192, 53005322</li>
+        <li>ตรวจสอบ Voltage Anomaly PEA 52011218 (157–278V swing) ด้วย Power Quality Analyzer</li>
+        <li>แจ้งเตือน Overload วิกฤต PEA 55009658 (124.4%) และวางแผนโอนโหลดชั่วคราว</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item sev-high">
+    <div class="tl-dot"></div>
+    <div class="tl-content">
+      <div class="tl-title">ระยะสั้น (1–4 สัปดาห์)</div>
+      <ul>
+        <li>ออก Design และ Spec หม้อแปลงสำหรับ PEA 55009658 (160→250 kVA), 54008867 (160→250 kVA), 67030375 (160→250 kVA)</li>
+        <li>ติดตาม Overload 80–100% ทุกสัปดาห์: 57012655, 56013661, 54014907, 67021835</li>
+        <li>ตรวจสอบ Meter Offline 31 เครื่อง และเร่งแก้ไขสัญญาณ</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item sev-warn">
+    <div class="tl-dot"></div>
+    <div class="tl-content">
+      <div class="tl-title">ระยะกลาง (1–3 เดือน)</div>
+      <ul>
+        <li>ขยายขนาดหม้อแปลง P1 จำนวน 3 จุด (55009658, 54008867, 67030375)</li>
+        <li>วางแผน Design หม้อแปลง P2 จำนวน 8 จุด เพื่อขยายในไตรมาส 3</li>
+        <li>ตรวจสอบ Loss Analysis และทำ Energy Audit สำหรับ 59007593</li>
+        <li>ปรับปรุง Collection Rate ให้ได้ ≥95%</li>
+      </ul>
+    </div>
+  </div>
+  <div class="timeline-item sev-info">
+    <div class="tl-dot"></div>
+    <div class="tl-content">
+      <div class="tl-title">ระยะยาว (3–12 เดือน)</div>
+      <ul>
+        <li>ทบทวนผัง Feeder และ Load Balance รายปี</li>
+        <li>วางแผน Network Reconfiguration สำหรับพื้นที่ที่มีปัญหาซ้ำซาก</li>
+        <li>พิจารณาติดตั้ง Automatic Voltage Regulator (AVR) ที่ 52011218</li>
+        <li>ขยาย Smart Meter Coverage เพื่อลดจำนวน Offline meters</li>
+      </ul>
+    </div>
+  </div>
+</div></div>
+
+<!-- Expected Results -->
+<div id="expected-results" class="section-title" style="color:#2E75B6;border-left-color:#2E75B6;margin-top:30px">🎯 ผลที่คาดหวังหลังการแก้ไขปัญหา</div>
+<p style="font-size:13px;color:#555;margin:8px 0 16px">สรุปผลลัพธ์ที่คาดว่าจะได้รับหลังดำเนินการแก้ไขปัญหาตาม Action Plan</p>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #C00000">
+  <div style="font-weight:700;font-size:14px;margin-bottom:6px">⚡ หม้อแปลงโหลดเกิน (Overloading) – P1</div>
+  <div style="font-size:12px;color:#666;margin-bottom:8px">ปัจจุบัน: 3 หม้อแปลง (55009658: 124.4%, 54008867: 108.5%, 67030375: 104.9%)</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333"><li style="margin-bottom:4px">ลดอุณหภูมิขดลวดหม้อแปลง ยืดอายุการใช้งาน 3–5 ปี</li><li style="margin-bottom:4px">ลดความเสี่ยงหม้อแปลงชำรุดกะทันหัน</li><li style="margin-bottom:4px">Loading % ลดเหลือ &lt;80% หลังขยาย kVA</li></ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #ED7D31">
+  <div style="font-weight:700;font-size:14px;margin-bottom:6px">⚡ Voltage Anomaly (52011218)</div>
+  <div style="font-size:12px;color:#666;margin-bottom:8px">ปัจจุบัน: แรงดันสวิงรุนแรง 157–278V</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333"><li style="margin-bottom:4px">แรงดันอยู่ในช่วงปกติ 207–253V</li><li style="margin-bottom:4px">ลดความเสียหายต่ออุปกรณ์ไฟฟ้าผู้ใช้</li><li style="margin-bottom:4px">ข้อมูลแรงดันถูกต้องสำหรับการวิเคราะห์</li></ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #2E75B6">
+  <div style="font-weight:700;font-size:14px;margin-bottom:6px">📡 TTU Offline (ค้างนาน)</div>
+  <div style="font-size:12px;color:#666;margin-bottom:8px">ปัจจุบัน: 3 TTU ยังคง Offline ต่อเนื่อง 2 เดือน</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333"><li style="margin-bottom:4px">หม้อแปลงกลับมา Online ส่งข้อมูลครบ 100%</li><li style="margin-bottom:4px">TTU Online Rate เพิ่มจาก 92.5% เป็น 100%</li><li style="margin-bottom:4px">ข้อมูลวิเคราะห์ครบถ้วนทุก TTU</li></ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #70AD47">
+  <div style="font-weight:700;font-size:14px;margin-bottom:6px">📊 Total Loss ปรับปรุงแล้ว</div>
+  <div style="font-size:12px;color:#666;margin-bottom:8px">PEA 59007593: Avg 8.55% (ปรับปรุงจาก 13.14% มี.ค.) | PEA 67030378: Avg 2.88% (ปรับปรุงจาก 19.11% มี.ค.)</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333"><li style="margin-bottom:4px">Total Loss ลดสู่ระดับ &lt;5% หลังตรวจสอบมิเตอร์ครบ</li><li style="margin-bottom:4px">PV Generation ช่วยลด Net Load กลางวันที่ 67030378</li><li style="margin-bottom:4px">ระบุมิเตอร์ผิดปกติได้ชัดเจนขึ้น</li></ul>
+</div>
+
+<div id="loss-analysis" class="section-title">📊 การวิเคราะห์ Total Loss – PEA 59007593 &amp; 67030378</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px;">
+  <div class="chart-card">
+    <h3>📡 PEA 59007593 – ร้านแดงโลหะกิต (160 kVA)</h3>
+    <div class="loss-kpi-row">
+      <div class="loss-kpi"><div class="lkv" style="color:#1F3864">8.55%</div><div class="lkl">Median Loss %<br><small>เม.ย. 2569</small></div></div>
+      <div class="loss-kpi"><div class="lkv" style="color:#70AD47">↓ จาก 13.14%</div><div class="lkl">เดือน มี.ค. 2569</div></div>
+      <div class="loss-kpi"><div class="lkv" style="color:#2E75B6">37,860</div><div class="lkl">Transformer<br><small>kWh ทั้งเดือน</small></div></div>
+    </div>
+    <div style="margin-top:10px;font-size:.8rem;color:#5a6478;">ข้อมูลครบ 30 วัน เม.ย. 2569 | Loss ลดลงจาก มี.ค. เนื่องจากข้อมูลมิเตอร์สมบูรณ์มากขึ้น</div>
+  </div>
+  <div class="chart-card">
+    <h3>⚡ PEA 67030378 – ห้วยยายจีน (160 kVA) + EV + PV</h3>
+    <div class="loss-kpi-row">
+      <div class="loss-kpi"><div class="lkv" style="color:#1F3864">2.88%</div><div class="lkl">Median Loss %<br><small>เม.ย. 2569</small></div></div>
+      <div class="loss-kpi"><div class="lkv" style="color:#70AD47">↓ จาก 19.11%</div><div class="lkl">เดือน มี.ค. 2569</div></div>
+      <div class="loss-kpi"><div class="lkv" style="color:#ed7d31">~2,952</div><div class="lkl">EV Energy (kWh)<br><small>เดือน เม.ย.</small></div></div>
+      <div class="loss-kpi"><div class="lkv" style="color:#70AD47">1,263</div><div class="lkl">PV Output (kWh)</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:.8rem;color:#5a6478;">PV ผลิตกลางวัน offset Net Load ทำให้ Loss% ติดลบช่วง 10:00–15:00</div>
+  </div>
+</div>
+<div class="charts-row" style="margin-bottom:14px;">
+  <div class="chart-card"><h3>📈 Hourly Load &amp; Loss% – PEA 59007593 (เม.ย.)</h3>
+    <div class="chart-wrap" style="height:260px"><canvas id="hourly59"></canvas></div></div>
+  <div class="chart-card"><h3>📈 Hourly Load &amp; Loss% – PEA 67030378 (เม.ย.)</h3>
+    <div class="chart-wrap" style="height:260px"><canvas id="hourly67"></canvas></div></div>
+</div>
+<div class="charts-row" style="margin-bottom:14px;">
+  <div class="chart-card"><h3>📉 Daily Median Loss % – PEA 59007593 (เมษายน 2569)</h3>
+    <div class="chart-wrap" style="height:220px"><canvas id="daily59"></canvas></div></div>
+  <div class="chart-card"><h3>📉 Daily Loss % – PEA 67030378 (เมษายน 2569)</h3>
+    <div class="chart-wrap" style="height:220px"><canvas id="daily67"></canvas></div></div>
+</div>
+<div class="chart-card" style="margin-bottom:14px;">
+  <h3>🌞 PV Generation Hourly Profile – PEA 67030378 (เม.ย.)</h3>
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:18px;align-items:start;">
+    <div class="chart-wrap" style="height:240px"><canvas id="pvChart"></canvas></div>
+    <div>
+      <p style="font-size:.83rem;font-weight:700;color:#375623;margin-bottom:8px;">☀️ PV Panels (3 ชุด)</p>
+      <div class="ev-row"><span class="pea-no">TA2430252835</span><span>394 kWh</span></div>
+      <div class="ev-row"><span class="pea-no">TA2470061626</span><span>448 kWh</span></div>
+      <div class="ev-row"><span class="pea-no">TA2470061134</span><span>421 kWh</span></div>
+      <div class="ev-row" style="font-weight:700;color:#375623"><span>รวม PV</span><span>1,263 kWh</span></div>
+      <p style="font-size:.83rem;font-weight:700;color:#ED7D31;margin-top:12px;margin-bottom:8px;">🔌 EV Chargers (3 สถานี)</p>
+      <div class="ev-row"><span class="pea-no">B22486020043</span><span>~173 kWh (0.4%)</span></div>
+      <div class="ev-row"><span class="pea-no">B22486020057</span><span>~2,952 kWh (61%)</span></div>
+      <div class="ev-row"><span class="pea-no">B22486020045</span><span>~14 kWh (0.6%)</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="prob-card sev-high" style="margin-bottom:14px;">
+  <div class="prob-header"><span class="prob-icon">📊</span>
+    <div class="prob-title-wrap"><span class="prob-type">การวิเคราะห์ Total Loss – PEA 59007593 (ร้านแดงโลหะกิต)</span>
+    <span class="prob-pea">ข้อมูล เมษายน 2569 | 160 kVA | Median Loss 8.55% (ดีขึ้นจาก 13.14%)</span></div>
+    <span class="prob-val">🟢 ปรับปรุงแล้ว</span></div>
+  <div class="prob-body">
+    <div class="prob-cause"><span class="label-tag">🔍 ผลการวิเคราะห์</span>
+      <p>• Median Loss: <strong>8.55%</strong> (เกณฑ์ กฟภ. &lt;5% แต่ดีขึ้นจาก 13.14% มี.ค.)<br>
+         • Loss สม่ำเสมอตลอด 30 วัน ไม่มี Spike ขนาดใหญ่<br>
+         • Loss สูงสุดในช่วง Peak hour (17:00) = 9.31%<br>
+         • ข้อมูลมิเตอร์ครบมากขึ้นทำให้ Loss สะท้อนค่าจริงมากขึ้น</p></div>
+    <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+      <ul><li>ทำ Energy Audit เพื่อตรวจสอบ Loss ที่เหลือ (8.55% → &lt;5%)</li>
+          <li>สำรวจสายไฟและข้อต่อในพื้นที่ Feeder</li>
+          <li>ตรวจสอบ CT Ratio ของมิเตอร์ที่อาจวัดค่าผิดพลาด</li>
+          <li>ตรวจสอบการใช้ไฟฟ้าผิดปกติในพื้นที่</li></ul></div>
+    <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+      <ul><li>Total Loss ลดต่ำกว่า 5%</li><li>ข้อมูลมิเตอร์ครบถ้วน 100%</li><li>ระบุมิเตอร์ผิดปกติได้ชัดเจน</li></ul></div>
+  </div></div>
+
+<div class="prob-card sev-high" style="margin-bottom:14px;">
+  <div class="prob-header"><span class="prob-icon">⚡</span>
+    <div class="prob-title-wrap"><span class="prob-type">การวิเคราะห์ Total Loss + EV/PV – PEA 67030378 (ห้วยยายจีน)</span>
+    <span class="prob-pea">ข้อมูล เมษายน 2569 | 160 kVA | EV 3 สถานี | PV 3 ชุด</span></div>
+    <span class="prob-val">🟢 Median Loss 2.88%</span></div>
+  <div class="prob-body">
+    <div class="prob-cause"><span class="label-tag">🔍 ผลการวิเคราะห์</span>
+      <p>• Median Loss: <strong>2.88%</strong> (ดีขึ้นมากจาก 19.11% มี.ค.)<br>
+         • PV ผลิต 1,263 kWh ช่วยลด Net Load กลางวัน → Loss ติดลบ 10:00–15:00<br>
+         • EV Charger B22486020057 ใช้งาน 61% ของเวลา (~2,952 kWh/เดือน)<br>
+         • EV ชาร์จ 24 ชม. สม่ำเสมอ ไม่กระจุกตัว Evening Peak</p></div>
+    <div class="prob-fix"><span class="label-tag">🛠 แนวทางแก้ไข</span>
+      <ul><li>กำหนด TOU Tariff สำหรับ EV เพื่อกระจายโหลดออกจาก Peak</li>
+          <li>พิจารณา BESS เพื่อเก็บพลังงาน PV ไว้ใช้ตอนเย็น</li>
+          <li>ติดตามการเพิ่ม EV เพิ่มเติม หากเกิน Loading 80% ต้องขยาย kVA</li>
+          <li>ตรวจสอบ Anti-Island Protection ของระบบ PV</li></ul></div>
+    <div class="prob-result"><span class="label-tag">🎯 ผลที่คาดหวัง</span>
+      <ul><li>Loss &lt;5% ด้วย PV offset ช่วยได้</li><li>EV Demand Response ลด Peak Load</li><li>ระบบ PV+EV เป็น Best Practice สำหรับ Smart TTU</li></ul></div>
+  </div></div>
+
+<div id="loss-rootcause" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">🔬 สาเหตุที่ทำให้ Total Loss สูง</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:18px">
+  <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #C00000">
+    <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#C00000">🔴 Technical Loss จากหม้อแปลงโหลดสูง</div>
+    <div style="font-size:12px;color:#444;line-height:1.6">หม้อแปลง 3 ตัวที่ Overload &gt;100% มี Copper Loss เพิ่มตามกำลังสอง เพิ่ม Technical Loss อย่างมีนัยสำคัญ ควรขยาย kVA ก่อนเป็นอันดับแรก</div>
+  </div>
+  <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #ED7D31">
+    <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#ED7D31">⚡ ข้อมูลมิเตอร์ยังไม่ครบ 100%</div>
+    <div style="font-size:12px;color:#444;line-height:1.6">Meter Offline 31 เครื่อง (7.75%) ทำให้ Total Meter Energy ไม่ครบ Loss % จึงสูงกว่าค่าจริง ต้องแก้ไข Collection Rate ก่อนวิเคราะห์ Loss ได้ถูกต้อง</div>
+  </div>
+  <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #70AD47">
+    <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#70AD47">🌞 PV Export ลด Net Import (67030378)</div>
+    <div style="font-size:12px;color:#444;line-height:1.6">PV ผลิต 1,263 kWh Export กลับเข้าระบบ ทำให้ Net Load จากหม้อแปลงลดลง Loss% จึงติดลบช่วงกลางวัน ซึ่งเป็นผลที่ดีจากการผลิตพลังงานแสงอาทิตย์</div>
+  </div>
+  <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #2E75B6">
+    <div style="font-weight:700;font-size:13px;margin-bottom:6px;color:#2E75B6">📡 Phase Unbalance เพิ่ม Neutral Current</div>
+    <div style="font-size:12px;color:#444;line-height:1.6">หม้อแปลงทั้ง 37 ตัวมี Phase Unbalance &gt;10% กระแส Neutral ที่เพิ่มขึ้นทำให้สูญเสียพลังงานในสายนิวทรัลและเพิ่ม Core Loss ในหม้อแปลง</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════ PM PLAN ══ -->
+<div id="pm-plan" class="section-title" style="color:#2E75B6;border-left-color:#2E75B6;margin-top:30px">🔧 แผน Preventive Maintenance (PM) หม้อแปลง</div>
+<p style="font-size:13px;color:#555;margin:8px 0 16px">กำหนดความถี่ PM ตาม Health Score — หม้อแปลง Score ต่ำ (วิกฤต/หมดอายุ) ต้องตรวจสอบบ่อยกว่า ข้อมูลเดือนเมษายน 2569</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:18px">
+  <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-top:3px solid #2E75B6">
+    <div style="font-weight:700;font-size:13px;color:#2E75B6;margin-bottom:8px">🔍 การตรวจวัดทางไฟฟ้า</div>
+    <ul style="margin:0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+      <li>วัดความต้านทานฉนวน (IR Test) &gt;1,000 MΩ</li>
+      <li>วัดความต้านทานขดลวด (Winding Resistance)</li>
+      <li>วัดอัตราส่วนแรงดัน (Turns Ratio Test)</li>
+      <li>วัด Dielectric Strength ของน้ำมันหม้อแปลง</li>
+    </ul>
+  </div>
+  <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-top:3px solid #ED7D31">
+    <div style="font-weight:700;font-size:13px;color:#ED7D31;margin-bottom:8px">🛢 การตรวจสอบน้ำมัน</div>
+    <ul style="margin:0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+      <li>วิเคราะห์ DGA (Dissolved Gas Analysis)</li>
+      <li>ตรวจ Moisture Content &lt;25 ppm</li>
+      <li>ตรวจ Acid Number &lt;0.3 mg KOH/g</li>
+      <li>เปลี่ยนน้ำมันเมื่อค่าเกินเกณฑ์</li>
+    </ul>
+  </div>
+  <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-top:3px solid #70AD47">
+    <div style="font-weight:700;font-size:13px;color:#70AD47;margin-bottom:8px">🔧 การตรวจสอบทางกล</div>
+    <ul style="margin:0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+      <li>ตรวจ Bushing, Gasket, O-Ring ไม่รั่วซึม</li>
+      <li>ตรวจ Tap Changer การทำงานปกติ</li>
+      <li>ทำความสะอาด Radiator / Cooling Fin</li>
+      <li>ตรวจ Ground Connection &lt;1 Ω</li>
+    </ul>
+  </div>
+  <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-top:3px solid #888">
+    <div style="font-weight:700;font-size:13px;color:#888;margin-bottom:8px">📡 การตรวจสอบระบบ TTU</div>
+    <ul style="margin:0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+      <li>ตรวจสอบ CT/PT Calibration ทุก 12 เดือน</li>
+      <li>ตรวจ Communication Signal Strength (GSM/NB-IoT)</li>
+      <li>อัปเดต Firmware TTU หากมีเวอร์ชันใหม่</li>
+      <li>ตรวจสอบ Battery Backup ของ TTU</li>
+    </ul>
+  </div>
+</div>
+
+<div style="font-weight:700;font-size:14px;margin-bottom:10px;color:#333">📅 กำหนดการ PM ตาม Priority (15 อันดับแรก)</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+<thead><tr style="background:#2E75B6;color:#fff">
+  <th style="padding:9px">PEA No.</th><th style="padding:9px;text-align:left">สถานที่</th>
+  <th style="padding:9px">อายุ</th><th style="padding:9px">Max Load%</th>
+  <th style="padding:9px">Health</th><th style="padding:9px">ความถี่ PM</th>
+  <th style="padding:9px;text-align:left">งาน PM หลัก</th>
+</tr></thead>
+<tbody>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 10px;font-family:monospace">41005481</td>
+  <td style="padding:8px 10px;font-size:11px">ซอยจอมเทียน 4</td>
+  <td style="padding:8px 10px;text-align:center">27 ปี</td>
+  <td style="padding:8px 10px;text-align:center">80.0%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#C00000">18.0</td>
+  <td style="padding:8px 10px;color:#C00000;font-weight:600;font-size:11px">ทุก 3 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil DGA, วัด IR Test, ตรวจ Bushing, Winding Resistance</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 10px;font-family:monospace">55009658</td>
+  <td style="padding:8px 10px;font-size:11px">วินล่านาวิน</td>
+  <td style="padding:8px 10px;text-align:center">15 ปี</td>
+  <td style="padding:8px 10px;text-align:center;color:#C00000;font-weight:700">124.4%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#C00000">22.5</td>
+  <td style="padding:8px 10px;color:#C00000;font-weight:600;font-size:11px">ทุก 3 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดอุณหภูมิ, ตรวจ Bushing — Overload สูงมาก ต้องขยาย kVA ด่วน</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 10px;font-family:monospace">46007269</td>
+  <td style="padding:8px 10px;font-size:11px">นาจอมเทียนซอย 6</td>
+  <td style="padding:8px 10px;text-align:center">24 ปี</td>
+  <td style="padding:8px 10px;text-align:center">81.3%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#C00000">21.0</td>
+  <td style="padding:8px 10px;color:#C00000;font-weight:600;font-size:11px">ทุก 3 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดอุณหภูมิ, ตรวจ Bushing, Winding Resistance</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 10px;font-family:monospace">54008867</td>
+  <td style="padding:8px 10px;font-size:11px">หน้า NP Hotel</td>
+  <td style="padding:8px 10px;text-align:center">16 ปี</td>
+  <td style="padding:8px 10px;text-align:center;color:#C00000;font-weight:700">108.5%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#C00000">26.0</td>
+  <td style="padding:8px 10px;color:#C00000;font-weight:600;font-size:11px">ทุก 3 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดอุณหภูมิ, ตรวจ Bushing, Winding Resistance</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 10px;font-family:monospace">52011218</td>
+  <td style="padding:8px 10px;font-size:11px">หน้าวัดทุ่งระหาร</td>
+  <td style="padding:8px 10px;text-align:center">18 ปี</td>
+  <td style="padding:8px 10px;text-align:center">76.4%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#C00000">27.5</td>
+  <td style="padding:8px 10px;color:#C00000;font-weight:600;font-size:11px">ทุก 3 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ CT/PT Calibration ด่วน (Voltage Anomaly), ตรวจ Tap Changer</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 10px;font-family:monospace">51011832</td>
+  <td style="padding:8px 10px;font-size:11px">หน้าวัดชากนอก</td>
+  <td style="padding:8px 10px;text-align:center">19 ปี</td>
+  <td style="padding:8px 10px;text-align:center">46.8%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#C00000">18.5</td>
+  <td style="padding:8px 10px;color:#C00000;font-weight:600;font-size:11px">ทุก 3 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, Winding Resistance</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 10px;font-family:monospace">48005133</td>
+  <td style="padding:8px 10px;font-size:11px">ซอยจอมเทียน 6</td>
+  <td style="padding:8px 10px;text-align:center">22 ปี</td>
+  <td style="padding:8px 10px;text-align:center">80.5%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#ED7D31">22.0</td>
+  <td style="padding:8px 10px;color:#ED7D31;font-weight:600;font-size:11px">ทุก 6 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, ทำความสะอาด, ตรวจการต่อลงดิน</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 10px;font-family:monospace">50116368</td>
+  <td style="padding:8px 10px;font-size:11px">ซอยจอมเทียน 8</td>
+  <td style="padding:8px 10px;text-align:center">20 ปี</td>
+  <td style="padding:8px 10px;text-align:center">55.5%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#ED7D31">26.0</td>
+  <td style="padding:8px 10px;color:#ED7D31;font-weight:600;font-size:11px">ทุก 6 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, ทำความสะอาด, ตรวจการต่อลงดิน</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 10px;font-family:monospace">67030375</td>
+  <td style="padding:8px 10px;font-size:11px">พัทยาเมืองใหม่ 2</td>
+  <td style="padding:8px 10px;text-align:center">3 ปี</td>
+  <td style="padding:8px 10px;text-align:center;color:#C00000;font-weight:700">104.9%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#ED7D31">45.0</td>
+  <td style="padding:8px 10px;color:#ED7D31;font-weight:600;font-size:11px">ทุก 6 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, ทำความสะอาด — โหลดเกิน 100%</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 10px;font-family:monospace">57012655</td>
+  <td style="padding:8px 10px;font-size:11px">บ้านสวนเนรมิตร</td>
+  <td style="padding:8px 10px;text-align:center">13 ปี</td>
+  <td style="padding:8px 10px;text-align:center">92.6%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#ED7D31">34.0</td>
+  <td style="padding:8px 10px;color:#ED7D31;font-weight:600;font-size:11px">ทุก 6 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, ทำความสะอาด, ตรวจการต่อลงดิน</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 10px;font-family:monospace">54014104</td>
+  <td style="padding:8px 10px;font-size:11px">หน้าวัดทุ่งกลม</td>
+  <td style="padding:8px 10px;text-align:center">16 ปี</td>
+  <td style="padding:8px 10px;text-align:center">79.7%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#ED7D31">35.0</td>
+  <td style="padding:8px 10px;color:#ED7D31;font-weight:600;font-size:11px">ทุก 6 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, ทำความสะอาด</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 10px;font-family:monospace">60010162</td>
+  <td style="padding:8px 10px;font-size:11px">หมู่บ้านภัสสร 1</td>
+  <td style="padding:8px 10px;text-align:center">10 ปี</td>
+  <td style="padding:8px 10px;text-align:center">73.4%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#ED7D31">40.0</td>
+  <td style="padding:8px 10px;color:#ED7D31;font-weight:600;font-size:11px">ทุก 6 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, ทำความสะอาด, ตรวจการต่อลงดิน</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 10px;font-family:monospace">59949173</td>
+  <td style="padding:8px 10px;font-size:11px">หลังเคหะ</td>
+  <td style="padding:8px 10px;text-align:center">11 ปี</td>
+  <td style="padding:8px 10px;text-align:center">61.6%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#ED7D31">43.0</td>
+  <td style="padding:8px 10px;color:#ED7D31;font-weight:600;font-size:11px">ทุก 6 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, ทำความสะอาด, ตรวจการต่อลงดิน</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 10px;font-family:monospace">63006454</td>
+  <td style="padding:8px 10px;font-size:11px">ห้วยยายจีน</td>
+  <td style="padding:8px 10px;text-align:center">7 ปี</td>
+  <td style="padding:8px 10px;text-align:center">70.7%</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#ED7D31">50.0</td>
+  <td style="padding:8px 10px;color:#ED7D31;font-weight:600;font-size:11px">ทุก 6 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Oil, วัดแรงดัน IR, ทำความสะอาด, ตรวจการต่อลงดิน</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;font-family:monospace">67030378</td>
+  <td style="padding:8px 10px;font-size:11px">ห้วยยายจีน (EV/PV)</td>
+  <td style="padding:8px 10px;text-align:center">3 ปี</td>
+  <td style="padding:8px 10px;text-align:center">–</td>
+  <td style="padding:8px 10px;text-align:center;font-weight:700;color:#70AD47">65.0</td>
+  <td style="padding:8px 10px;color:#70AD47;font-weight:600;font-size:11px">ทุก 12 เดือน</td>
+  <td style="padding:8px 10px;font-size:11px;color:#444">ตรวจ Communication, CT/PT, Firmware อัปเดต</td>
+</tr>
+</tbody></table>
+</div>
+
+
+<!-- ═════════════════════════════════════════════ EXPORT METERS ════════ -->
+<div id="export-meters" class="section-title" style="color:#70AD47;border-left-color:#70AD47;margin-top:30px">☀️ มิเตอร์ที่ส่งพลังงานกลับเข้าระบบ (Export Energy)</div>
+<p style="font-size:13px;color:#555;margin:8px 0 12px">มิเตอร์ที่มีค่า Active Energy Export (−A) &gt; 0.1 kWh หมายถึงผู้ใช้ไฟฟ้าที่ติดตั้ง Solar PV และส่งพลังงานส่วนเกินกลับระบบจำหน่าย — ข้อมูลเดือนเมษายน 2569</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+  <div style="background:#fff;border-radius:10px;padding:18px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #70AD47;flex:1;min-width:130px">
+    <div style="font-size:26px;font-weight:800;color:#70AD47">12</div>
+    <div style="font-size:12px;color:#555;margin-top:4px">มิเตอร์ Export รวม</div>
+    <div style="font-size:11px;color:#888">&gt; 0.1 kWh</div>
+  </div>
+  <div style="background:#fff;border-radius:10px;padding:18px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #2E75B6;flex:1;min-width:130px">
+    <div style="font-size:26px;font-weight:800;color:#2E75B6">1,402.7</div>
+    <div style="font-size:12px;color:#555;margin-top:4px">kWh Export รวม</div>
+    <div style="font-size:11px;color:#888">เม.ย. 2569</div>
+  </div>
+  <div style="background:#fff;border-radius:10px;padding:18px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #7030A0;flex:1;min-width:130px">
+    <div style="font-size:26px;font-weight:800;color:#7030A0">3</div>
+    <div style="font-size:12px;color:#555;margin-top:4px">หม้อแปลงที่มี PV</div>
+  </div>
+  <div style="background:#fff;border-radius:10px;padding:18px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #C00000;flex:1;min-width:130px">
+    <div style="font-size:26px;font-weight:800;color:#C00000">2</div>
+    <div style="font-size:12px;color:#555;margin-top:4px">Net Exporter</div>
+    <div style="font-size:11px;color:#888">Export &gt; Import ⚠️</div>
+  </div>
+  <div style="background:#fff;border-radius:10px;padding:18px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #70AD47;flex:1;min-width:130px">
+    <div style="font-size:26px;font-weight:800;color:#70AD47">10</div>
+    <div style="font-size:12px;color:#555;margin-top:4px">มิเตอร์ PV ใน 67030378</div>
+    <div style="font-size:11px;color:#888">PV Zone หลัก</div>
+  </div>
+</div>
+
+<div style="font-weight:700;font-size:14px;margin-bottom:10px;color:#333">📊 สรุปรายหม้อแปลง</div>
+<div style="overflow-x:auto;margin-bottom:18px">
+<table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+<thead><tr style="background:#70AD47;color:#fff">
+  <th style="padding:9px">หม้อแปลง</th><th style="padding:9px">จำนวนมิเตอร์</th>
+  <th style="padding:9px;text-align:right">Export รวม (kWh)</th><th style="padding:9px;text-align:right">Import รวม (kWh)</th>
+  <th style="padding:9px">ประเภท</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td style="padding:8px 10px;font-weight:700">67-030378</td>
+  <td style="padding:8px 10px;text-align:center">10</td>
+  <td style="padding:8px 10px;text-align:right;font-weight:700;color:#70AD47">1,400.8</td>
+  <td style="padding:8px 10px;text-align:right">2,902.4</td>
+  <td style="padding:8px 10px;text-align:center;color:#70AD47;font-weight:600">🌞 PV Prosumer</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;font-weight:700">66-002351</td>
+  <td style="padding:8px 10px;text-align:center">1</td>
+  <td style="padding:8px 10px;text-align:right;font-weight:700;color:#70AD47">1.4</td>
+  <td style="padding:8px 10px;text-align:right">1,223.0</td>
+  <td style="padding:8px 10px;text-align:center;color:#70AD47;font-weight:600">🌞 PV Prosumer</td>
+</tr>
+<tr>
+  <td style="padding:8px 10px;font-weight:700">59-007593</td>
+  <td style="padding:8px 10px;text-align:center">1</td>
+  <td style="padding:8px 10px;text-align:right;font-weight:700;color:#70AD47">0.5</td>
+  <td style="padding:8px 10px;text-align:right">110.1</td>
+  <td style="padding:8px 10px;text-align:center;color:#70AD47;font-weight:600">🌞 PV Prosumer</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div style="background:#fff3cd;border-left:4px solid #C00000;border-radius:6px;padding:12px 16px;margin-bottom:16px;font-size:12px">
+⚠️ <b>Net Exporter – มิเตอร์ 6703011 &amp; 6703002 (67-030378):</b> ทั้งสองมิเตอร์ส่งพลังงานกลับมากกว่าดึงจากระบบ (Export 132.9% และ 156.5%) ควรตรวจสอบ Export Limiter, CT Ratio, และ Reverse Power Protection เพื่อป้องกัน Over-Voltage ปลายสาย
+</div>
+
+<div style="font-weight:700;font-size:14px;margin-bottom:8px;color:#333">📋 รายละเอียดมิเตอร์ Export รายตัว (12 มิเตอร์)</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+<thead><tr style="background:#2E75B6;color:#fff">
+  <th style="padding:8px">Meter No.</th><th style="padding:8px">หม้อแปลง</th><th style="padding:8px">เฟส</th>
+  <th style="padding:8px;text-align:right">Import (kWh)</th><th style="padding:8px;text-align:right">Export (kWh)</th>
+  <th style="padding:8px;text-align:right">Net (kWh)</th><th style="padding:8px">Export%</th><th style="padding:8px">ประเภท</th>
+</tr></thead>
+<tbody>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703011</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">280.4</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">372.8</td>
+  <td style="padding:7px 9px;text-align:right;color:#C00000;font-weight:700">-92.4</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#C00000">132.9%</td>
+  <td style="padding:7px 9px"><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">⚠️ Net Exporter</span></td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703002</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">101.3</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">158.5</td>
+  <td style="padding:7px 9px;text-align:right;color:#C00000;font-weight:700">-57.2</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#C00000">156.5%</td>
+  <td style="padding:7px 9px"><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">⚠️ Net Exporter</span></td>
+</tr>
+<tr style="background:#f5fff5">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703013</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">1,073.5</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">237.0</td>
+  <td style="padding:7px 9px;text-align:right">836.5</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">22.1%</td>
+  <td style="padding:7px 9px"><span style="background:#2E75B6;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV</span></td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703001</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">219.4</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">168.6</td>
+  <td style="padding:7px 9px;text-align:right">50.8</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">76.9%</td>
+  <td style="padding:7px 9px"><span style="background:#70AD47;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV สูง</span></td>
+</tr>
+<tr style="background:#f5fff5">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6701017</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">121.0</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">115.7</td>
+  <td style="padding:7px 9px;text-align:right">5.3</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">95.6%</td>
+  <td style="padding:7px 9px"><span style="background:#70AD47;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV สูง</span></td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703004</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">235.1</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">114.3</td>
+  <td style="padding:7px 9px;text-align:right">120.8</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">48.6%</td>
+  <td style="padding:7px 9px"><span style="background:#2E75B6;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV</span></td>
+</tr>
+<tr style="background:#f5fff5">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6701031</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">109.9</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">106.7</td>
+  <td style="padding:7px 9px;text-align:right">3.2</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">97.1%</td>
+  <td style="padding:7px 9px"><span style="background:#70AD47;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV สูง</span></td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703025</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">336.9</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">79.6</td>
+  <td style="padding:7px 9px;text-align:right">257.3</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">23.6%</td>
+  <td style="padding:7px 9px"><span style="background:#2E75B6;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV</span></td>
+</tr>
+<tr style="background:#f5fff5">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703019</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">141.1</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">45.1</td>
+  <td style="padding:7px 9px;text-align:right">96.0</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">31.9%</td>
+  <td style="padding:7px 9px"><span style="background:#2E75B6;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV</span></td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703020</td>
+  <td style="padding:7px 9px;text-align:center">67-030378</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">283.8</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">2.5</td>
+  <td style="padding:7px 9px;text-align:right">281.3</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">0.9%</td>
+  <td style="padding:7px 9px"><span style="background:#2E75B6;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV</span></td>
+</tr>
+<tr style="background:#f5fff5">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6701054</td>
+  <td style="padding:7px 9px;text-align:center">66-002351</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">1,223.0</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">1.4</td>
+  <td style="padding:7px 9px;text-align:right">1,221.6</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">0.1%</td>
+  <td style="padding:7px 9px"><span style="background:#2E75B6;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV</span></td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 9px;font-weight:700;font-family:monospace">6703031</td>
+  <td style="padding:7px 9px;text-align:center">59-007593</td>
+  <td style="padding:7px 9px;text-align:center">A phase</td>
+  <td style="padding:7px 9px;text-align:right;color:#2E75B6;font-weight:700">110.1</td>
+  <td style="padding:7px 9px;text-align:right;color:#70AD47;font-weight:700">0.5</td>
+  <td style="padding:7px 9px;text-align:right">109.6</td>
+  <td style="padding:7px 9px;text-align:center;font-weight:700;color:#70AD47">0.5%</td>
+  <td style="padding:7px 9px"><span style="background:#2E75B6;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">🌞 PV</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ══════════════════════════════════════════ LOSS IMPROVEMENT ════════ -->
+<div id="loss-improvement" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">🛠 วิธีการปรับปรุงและลด Total Loss</div>
+<p style="font-size:13px;color:#555;margin:8px 0 16px">แนวทาง 5 ด้านในการลด Total Loss ของหม้อแปลง PEA 59007593 (8.55%) และ 67030378 (2.88%) ให้อยู่ในระดับต่ำกว่า 5% อย่างยั่งยืน</p>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #C00000">
+  <div style="font-weight:700;font-size:13px;color:#C00000;margin-bottom:8px">🔍 1. ตรวจสอบ Non-Technical Loss (มิเตอร์ผิดพลาด / ลักลอบใช้ไฟ)</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333;line-height:1.7">
+    <li>ลงพื้นที่ตรวจสอบมิเตอร์ 31 เครื่องที่ Offline ใน Collection Rate ทั้ง 59007593 และ 67030378</li>
+    <li>เปรียบเทียบค่า Meter Reading กับ Manual ทุก 3 เดือน ตรวจจับมิเตอร์อ่านค่าซ้ำหรือผิดปกติ</li>
+    <li>ตรวจสอบ CT Ratio ของทุก TTU ให้ตรงกับ Rated Current จริง — CT ผิดเป็นสาเหตุ Loss จาก Measurement Error</li>
+    <li>ใช้ AMI Data Analytics ตรวจจับพฤติกรรมผิดปกติ (Power Factor ต่ำ, คงที่หลายเดือน)</li>
+    <li>รายงานข้อสงสัยไปยังฝ่ายนิติกรรมหากพบหลักฐานการลักลอบใช้ไฟ</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #ED7D31">
+  <div style="font-weight:700;font-size:13px;color:#ED7D31;margin-bottom:8px">⚡ 2. ลด Technical Loss ในสายจำหน่าย</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333;line-height:1.7">
+    <li>ปรับ Tap Position หม้อแปลงให้แรงดันปลายสายอยู่ที่ 220–230V (เฉพาะ 59007593 &amp; 67030378 มีปัญหาแรงดันตก)</li>
+    <li>ลดระยะทางสายจำหน่ายหรือเพิ่มขนาดสายในพื้นที่ Under Voltage (56013661 Avg 204.5V)</li>
+    <li>ติดตั้ง Capacitor Bank ปรับปรุง Power Factor ในพื้นที่ที่มี Inductive Load สูง</li>
+    <li>สำรวจสาย LV อายุ &gt;20 ปีเพื่อเปลี่ยน/ปรับปรุงสาย (ลดความต้านทานสาย)</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #2E75B6">
+  <div style="font-weight:700;font-size:13px;color:#2E75B6;margin-bottom:8px">📊 3. ปรับปรุงคุณภาพข้อมูล (Data Quality)</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333;line-height:1.7">
+    <li>เร่งรัด Collection Rate ของ 31 มิเตอร์ที่ CR=0% เข้า MDMS ให้ครบ — ข้อมูลไม่ครบ = Loss ดูสูงเกินจริง</li>
+    <li>ตรวจสอบ Timestamp Synchronization ระหว่าง TTU และมิเตอร์</li>
+    <li>เพิ่มความถี่ Polling Data เป็น 5 นาทีในหม้อแปลงที่ Loss สูงต่อเนื่อง</li>
+    <li>ใช้ Data Imputation Algorithm เติมข้อมูลที่หายเพื่อการวิเคราะห์ที่แม่นยำขึ้น</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #7030A0">
+  <div style="font-weight:700;font-size:13px;color:#7030A0;margin-bottom:8px">📦 4. ขยาย/เปลี่ยนหม้อแปลง (ลด Load-related Loss)</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333;line-height:1.7">
+    <li>เปลี่ยนหม้อแปลง 55009658 (124.4%), 54008867 (108.5%), 67030375 (104.9%) ที่โหลดเกิน 100% เป็น kVA ใหญ่ขึ้น</li>
+    <li>หม้อแปลงโหลด &lt;30% มี Iron Loss สูงสัดส่วน — พิจารณาควบรวมโหลดหรือเปลี่ยนเป็น Amorphous Core</li>
+    <li>ใช้หม้อแปลงประสิทธิภาพสูง (Amorphous Core) เมื่อถึงรอบเปลี่ยน ลด No-load Loss ได้ 70%</li>
+    <li>ติดตั้ง OLTC (On-Load Tap Changer) ใน 52011218 ที่มีแรงดันแปรปรวนสูง 157–279V</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin-bottom:12px;border-left:5px solid #70AD47">
+  <div style="font-weight:700;font-size:13px;color:#70AD47;margin-bottom:8px">🌞 5. บริหาร PV/EV เพื่อลด Loss (67030378)</div>
+  <ul style="margin:0;padding-left:18px;font-size:13px;color:#333;line-height:1.7">
+    <li>ใช้ Time-of-Use Tariff กระตุ้นให้ EV ชาร์จนอก Peak (06:00–09:00 น.) ลด Evening Peak Loss</li>
+    <li>Net Exporter 6703011 และ 6703002 ควรติดตั้ง Export Limiter ป้องกัน Over-Voltage ปลายสาย</li>
+    <li>วิเคราะห์ Net Metering Balance ทุกเดือนเพื่อหักลบ PV Export 1,400.8 kWh/เดือน จาก Loss คำนวณ</li>
+    <li>เพิ่ม Battery Storage ที่มิเตอร์ PV เพื่อลด Reverse Power Flow ช่วงกลางวัน</li>
+  </ul>
+</div>
+
+<!-- ══════════════════════════════════════════ VOLTAGE FIX ════════════ -->
+<div id="voltage-fix" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">⚡ วิธีแก้ไขปัญหาแรงดันของมิเตอร์รายตัว</div>
+<p style="font-size:13px;color:#555;margin:8px 0 12px">มิเตอร์ที่มีปัญหาแรงดัน: Under Voltage (&lt;207V) = <b>108 มิเตอร์</b> | Over Voltage (&gt;253V) = <b>3 มิเตอร์</b> — ข้อมูลเมษายน 2569</p>
+
+<div style="font-weight:700;font-size:14px;margin-bottom:10px;color:#333">📌 แนวทางแก้ไขจำแนกตามหม้อแปลง (10 อันดับแรก)</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:18px">
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #C00000">
+  <div style="font-weight:700;color:#C00000;font-size:13px;margin-bottom:4px">🔴 56013661 — วิกฤตสุด</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">1 มิเตอร์ | 1,654 เหตุการณ์ | <b>Avg 204.5V</b> | Min 176.1V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ปรับ Tap Position +2 ด่วน</li><li>สำรวจสาย LV ระยะปลาย</li><li>ตรวจ Load Balance เฟส</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #d4a800">
+  <div style="font-weight:700;color:#d4a800;font-size:13px;margin-bottom:4px">🔌 67030378</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">11 มิเตอร์ | 4,632 เหตุการณ์ | Avg 212.3V | Min 186.1V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ตรวจ Load Balance ระหว่างเฟส B (มิเตอร์ส่วนใหญ่เฟส B)</li>
+    <li>วัดแรงดันที่ Meter ช่วง Peak</li><li>ตรวจ Connection ปลายสาย</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #d4a800">
+  <div style="font-weight:700;color:#d4a800;font-size:13px;margin-bottom:4px">🔌 63010844</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">5 มิเตอร์ | 2,516 เหตุการณ์ | Avg 211.8V | Min 187.5V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ตรวจ Load Balance ระหว่างเฟส B</li>
+    <li>ตรวจสอบ Connection ปลายสาย</li><li>วัดแรงดันในช่วงโหลด Peak</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #d4a800">
+  <div style="font-weight:700;color:#d4a800;font-size:13px;margin-bottom:4px">🔌 59007593</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">20 มิเตอร์ | 1,556 เหตุการณ์ | Avg 217.3V | Min 191.4V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ตรวจสอบ Connection สายเฟส C (ส่วนใหญ่ปัญหาเฟส C)</li>
+    <li>ตรวจ Load Balancing ระหว่างเฟส</li><li>วัดแรงดันที่ Meter ในช่วง Peak</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #d4a800">
+  <div style="font-weight:700;color:#d4a800;font-size:13px;margin-bottom:4px">🔌 54008867</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">5 มิเตอร์ | 1,392 เหตุการณ์ | Avg 216.2V | Min 185.6V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ขยาย kVA หม้อแปลงลด Voltage Drop</li>
+    <li>ตรวจ Connection เฟส C</li><li>สำรวจสายจำหน่ายปลายสาย</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #d4a800">
+  <div style="font-weight:700;color:#d4a800;font-size:13px;margin-bottom:4px">🔌 63006454</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">3 มิเตอร์ | 834 เหตุการณ์ | Avg 216.2V | Min 194.0V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ตรวจ Load Balance ระหว่างเฟส B</li>
+    <li>ตรวจ Connection ปลายสาย</li><li>วัดแรงดันในช่วงโหลด Peak</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #d4a800">
+  <div style="font-weight:700;color:#d4a800;font-size:13px;margin-bottom:4px">🔌 63030647</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">4 มิเตอร์ | 772 เหตุการณ์ | Avg 214.8V | Min 189.2V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ตรวจ Connection ปลายสาย</li>
+    <li>ตรวจ Load Balance ระหว่างเฟส</li><li>วัดแรงดันในช่วงโหลด Peak</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #d4a800">
+  <div style="font-weight:700;color:#d4a800;font-size:13px;margin-bottom:4px">🔌 46007269</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">2 มิเตอร์ | 718 เหตุการณ์ | Avg 213.1V | Min 195.2V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ตรวจ Load Balance เฟส A</li>
+    <li>สำรวจสายปลาย</li><li>วัดแรงดันในช่วงโหลด Peak</li>
+  </ul>
+</div>
+<div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #d4a800">
+  <div style="font-weight:700;color:#d4a800;font-size:13px;margin-bottom:4px">🔌 67030375</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">5 มิเตอร์ | 682 เหตุการณ์ | Avg 216.7V | Min 195.1V</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ขยาย kVA ลด Voltage Drop (โหลด 104.9%)</li>
+    <li>ตรวจ Connection ปลายสาย</li><li>วัดแรงดันช่วง Peak</li>
+  </ul>
+</div>
+<div style="background:#fff3e0;border-radius:8px;padding:14px;box-shadow:0 2px 6px rgba(0,0,0,.07);border-left:4px solid #ED7D31">
+  <div style="font-weight:700;color:#ED7D31;font-size:13px;margin-bottom:4px">⬆️ Over Voltage — 64004898</div>
+  <div style="font-size:12px;color:#555;margin-bottom:2px">3 มิเตอร์ | Max 261.4V | เฉพาะเฟส A และ C</div>
+  <ul style="margin:4px 0 0;padding-left:16px;font-size:12px;color:#333;line-height:1.7">
+    <li>ปรับ Tap Position -1 เพื่อลดแรงดัน</li>
+    <li>ตรวจสอบ PV Net Exporter ในพื้นที่</li><li>ตรวจ Load Unbalance เฟส</li>
+  </ul>
+</div>
+</div>
+
+<div style="font-weight:700;font-size:14px;margin-bottom:8px;color:#C00000">🔴 มิเตอร์ Under Voltage รายตัว (20 อันดับแรก จาก 108 มิเตอร์)</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+<thead><tr style="background:#C00000;color:#fff">
+  <th style="padding:8px">Meter No.</th><th style="padding:8px;text-align:left">หม้อแปลง</th><th style="padding:8px">เฟส</th>
+  <th style="padding:8px">เหตุการณ์</th><th style="padding:8px">Avg V</th><th style="padding:8px">Min V</th>
+  <th style="padding:8px">ความรุนแรง</th><th style="padding:8px;text-align:left">วิธีแก้ไข</th>
+</tr></thead>
+<tbody>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701334</td>
+  <td style="padding:7px 8px;font-size:11px">56013661</td>
+  <td style="padding:7px 8px;font-size:11px">A phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000;font-weight:700">1,654</td>
+  <td style="padding:7px 8px;text-align:center">204.5V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">176.1V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">วิกฤต</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ปรับ Tap +2, สำรวจสาย LV</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701201</td>
+  <td style="padding:7px 8px;font-size:11px">63010844</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000;font-weight:700">1,076</td>
+  <td style="padding:7px 8px;text-align:center">208.6V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">187.5V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">วิกฤต</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance เฟส B</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701210</td>
+  <td style="padding:7px 8px;font-size:11px">63010844</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000;font-weight:700">994</td>
+  <td style="padding:7px 8px;text-align:center">209.0V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">188.7V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">วิกฤต</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance เฟส B</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701010</td>
+  <td style="padding:7px 8px;font-size:11px">67030378</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">622</td>
+  <td style="padding:7px 8px;text-align:center">210.8V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">191.7V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701008</td>
+  <td style="padding:7px 8px;font-size:11px">67030378</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">606</td>
+  <td style="padding:7px 8px;text-align:center">210.9V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">191.7V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701002</td>
+  <td style="padding:7px 8px;font-size:11px">67030378</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">604</td>
+  <td style="padding:7px 8px;text-align:center">210.8V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">186.1V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701064</td>
+  <td style="padding:7px 8px;font-size:11px">54008867</td>
+  <td style="padding:7px 8px;font-size:11px">C phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">598</td>
+  <td style="padding:7px 8px;text-align:center">211.7V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">185.6V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ขยาย kVA หม้อแปลง</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701007</td>
+  <td style="padding:7px 8px;font-size:11px">67030378</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">594</td>
+  <td style="padding:7px 8px;text-align:center">211.0V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">192.2V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701009</td>
+  <td style="padding:7px 8px;font-size:11px">67030378</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">582</td>
+  <td style="padding:7px 8px;text-align:center">210.9V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">192.3V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701011</td>
+  <td style="padding:7px 8px;font-size:11px">67030378</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">568</td>
+  <td style="padding:7px 8px;text-align:center">211.1V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">191.9V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701153</td>
+  <td style="padding:7px 8px;font-size:11px">59007593</td>
+  <td style="padding:7px 8px;font-size:11px">C phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">406</td>
+  <td style="padding:7px 8px;text-align:center">212.9V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">192.0V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance เฟส C</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701082</td>
+  <td style="padding:7px 8px;font-size:11px">46007269</td>
+  <td style="padding:7px 8px;font-size:11px">A phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">374</td>
+  <td style="padding:7px 8px;text-align:center">213.1V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">197.3V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701086</td>
+  <td style="padding:7px 8px;font-size:11px">46007269</td>
+  <td style="padding:7px 8px;font-size:11px">A phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">344</td>
+  <td style="padding:7px 8px;text-align:center">213.1V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">195.2V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701061</td>
+  <td style="padding:7px 8px;font-size:11px">54008867</td>
+  <td style="padding:7px 8px;font-size:11px">C phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">334</td>
+  <td style="padding:7px 8px;text-align:center">214.4V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">190.2V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ขยาย kVA หม้อแปลง</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701001</td>
+  <td style="padding:7px 8px;font-size:11px">67030378</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#ED7D31;font-weight:700">332</td>
+  <td style="padding:7px 8px;text-align:center">212.8V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">194.7V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">สูง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701218</td>
+  <td style="padding:7px 8px;font-size:11px">51011832</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#8a6514;font-weight:700">304</td>
+  <td style="padding:7px 8px;text-align:center">212.2V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">193.0V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">ปานกลาง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance เฟส B</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701146</td>
+  <td style="padding:7px 8px;font-size:11px">59007593</td>
+  <td style="padding:7px 8px;font-size:11px">C phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#8a6514;font-weight:700">300</td>
+  <td style="padding:7px 8px;text-align:center">214.2V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">191.4V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">ปานกลาง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance เฟส C</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701219</td>
+  <td style="padding:7px 8px;font-size:11px">51011832</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#8a6514;font-weight:700">282</td>
+  <td style="padding:7px 8px;text-align:center">212.3V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">197.3V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">ปานกลาง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance เฟส B</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701132</td>
+  <td style="padding:7px 8px;font-size:11px">63006454</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#8a6514;font-weight:700">278</td>
+  <td style="padding:7px 8px;text-align:center">216.1V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">194.1V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">ปานกลาง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance เฟส B</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:7px 8px;font-weight:700;font-family:monospace">6701133</td>
+  <td style="padding:7px 8px;font-size:11px">63006454</td>
+  <td style="padding:7px 8px;font-size:11px">B phase</td>
+  <td style="padding:7px 8px;text-align:center;color:#8a6514;font-weight:700">278</td>
+  <td style="padding:7px 8px;text-align:center">216.2V</td>
+  <td style="padding:7px 8px;text-align:center;color:#C00000">194.3V</td>
+  <td style="padding:7px 8px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:600">ปานกลาง</span></td>
+  <td style="padding:7px 8px;font-size:11px;color:#2E75B6">ตรวจ Load Balance เฟส B</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="expansion-plan" class="section-title" style="color:#7030A0;border-left-color:#7030A0;margin-top:30px">📦 แผนการขยายขนาดหม้อแปลง (kVA Expansion Plan)</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+<thead><tr style="background:#7030A0;color:#fff">
+<th style="padding:10px">ลำดับ</th><th style="padding:10px">PEA No.</th><th style="padding:10px;text-align:left">สถานที่</th>
+<th style="padding:10px">ปัจจุบัน</th><th style="padding:10px">Loading %</th><th style="padding:10px">แนะนำ</th><th style="padding:10px">ลำดับ</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:8px 10px;font-weight:600">1</td>
+    <td style="padding:8px 10px;font-family:monospace">55009658</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">วินล่านาวิน</td>
+    <td style="padding:8px 10px;text-align:center">160 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#C00000;font-weight:700">124.4%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P1 เร่งด่วน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">2</td>
+    <td style="padding:8px 10px;font-family:monospace">54008867</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">หน้า NP Hotel ซอยไฮโซโอเทว</td>
+    <td style="padding:8px 10px;text-align:center">160 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#C00000;font-weight:700">108.5%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P1 เร่งด่วน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">3</td>
+    <td style="padding:8px 10px;font-family:monospace">67030375</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">ตรงข้ามพัทยาเมืองใหม่ ชัยพฤษย์ 2</td>
+    <td style="padding:8px 10px;text-align:center">160 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#C00000;font-weight:700">104.9%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P1 เร่งด่วน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">4</td>
+    <td style="padding:8px 10px;font-family:monospace">57012655</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">บ้านสวนเนรมิตร</td>
+    <td style="padding:8px 10px;text-align:center">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#ED7D31;font-weight:700">92.6%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">315 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P2 วางแผน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">5</td>
+    <td style="padding:8px 10px;font-family:monospace">56013661</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">ปากซอยหนองหิน</td>
+    <td style="padding:8px 10px;text-align:center">200 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#ED7D31;font-weight:700">84.9%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P2 วางแผน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">6</td>
+    <td style="padding:8px 10px;font-family:monospace">54014907</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">ซอยจอมเทียน 13</td>
+    <td style="padding:8px 10px;text-align:center">160 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#ED7D31;font-weight:700">84.4%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P2 วางแผน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">7</td>
+    <td style="padding:8px 10px;font-family:monospace">67021835</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">ซอยหนองปลาไหล</td>
+    <td style="padding:8px 10px;text-align:center">200 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#ED7D31;font-weight:700">84.1%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P2 วางแผน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">8</td>
+    <td style="padding:8px 10px;font-family:monospace">54014104</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">หน้าวัดทุ่งกลม</td>
+    <td style="padding:8px 10px;text-align:center">160 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#ED7D31;font-weight:700">81.7%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P2 วางแผน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">9</td>
+    <td style="padding:8px 10px;font-family:monospace">66002351</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">ซอยหนองกระบอก</td>
+    <td style="padding:8px 10px;text-align:center">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#ED7D31;font-weight:700">81.7%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">315 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P2 วางแผน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">10</td>
+    <td style="padding:8px 10px;font-family:monospace">46007269</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">นาจอมเทียนซอย 6</td>
+    <td style="padding:8px 10px;text-align:center">200 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#ED7D31;font-weight:700">81.3%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P2 วางแผน</span></td>
+    </tr><tr><td style="padding:8px 10px;font-weight:600">11</td>
+    <td style="padding:8px 10px;font-family:monospace">48005133</td>
+    <td style="padding:8px 10px;font-size:12px;color:#555">ซอยจอมเทียน 6</td>
+    <td style="padding:8px 10px;text-align:center">160 kVA</td>
+    <td style="padding:8px 10px;text-align:center;color:#ED7D31;font-weight:700">80.5%</td>
+    <td style="padding:8px 10px;text-align:center;color:#2E75B6;font-weight:700">250 kVA</td>
+    <td style="padding:8px 10px;text-align:center"><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">P2 วางแผน</span></td>
+    </tr></tbody></table></div>
+
+<div id="health-assessment" class="section-title" style="color:#C00000;border-left-color:#C00000;margin-top:30px">🩺 การประเมินอายุและสุขภาพหม้อแปลง</div>
+
+<!-- ── 2. สูตรคำนวณ ── -->
+<div style="background:#EBF3FB;border-radius:10px;padding:18px;margin-bottom:18px;border-left:5px solid #2E75B6">
+  <div style="font-weight:700;font-size:14px;color:#1F3864;margin-bottom:12px">📐 วิธีการคำนวณอายุการใช้งานที่เหลือ (IEC 60076 Thermal Life Model)</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+    <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+      <div style="font-weight:700;font-size:12px;color:#2E75B6;margin-bottom:6px">📌 ขั้นตอน 1 — อายุฐาน</div>
+      <div style="font-family:monospace;font-size:13px;background:#f0f4ff;padding:8px 12px;border-radius:6px;color:#1F3864;margin-bottom:6px">
+        อายุที่เหลือฐาน = 25 − อายุจริง (ปี)
+      </div>
+      <div style="font-size:11px;color:#555">มาตรฐาน IEC 60076-7 กำหนดอายุพิกัดหม้อแปลง = <b>25 ปี</b> ที่อุณหภูมิ Hot-spot 98°C</div>
+    </div>
+    <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+      <div style="font-weight:700;font-size:12px;color:#ED7D31;margin-bottom:6px">📌 ขั้นตอน 2 — Thermal Aging Factor (FAA)</div>
+      <div style="font-family:monospace;font-size:12px;background:#fff7f0;padding:8px 12px;border-radius:6px;color:#7d3000;margin-bottom:6px">
+        โหลด &lt; 80%  → FAA = 0.8 (เสื่อมช้า)<br>
+        โหลด 80–100%  → FAA = 1.0 (ปกติ)<br>
+        โหลด 100–120% → FAA = 1.5 (เสื่อมเร็ว 50%)<br>
+        โหลด &gt; 120%  → FAA = 2.0 (เสื่อม 2×)
+      </div>
+      <div style="font-size:11px;color:#555">FAA ปรับตาม IEC 60076-7 Table 1 (Hot-spot temp vs aging rate)</div>
+    </div>
+    <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+      <div style="font-weight:700;font-size:12px;color:#70AD47;margin-bottom:6px">📌 ขั้นตอน 3 — อายุที่เหลือจริง</div>
+      <div style="font-family:monospace;font-size:13px;background:#f0fff4;padding:8px 12px;border-radius:6px;color:#1a5c2e;margin-bottom:6px">
+        อายุเหลือ = (25 − อายุจริง) ÷ FAA
+      </div>
+      <div style="font-size:11px;color:#555">ตัวอย่าง: 55009658 อายุ 15 ปี โหลด 124.4% (FAA=2.0)<br>
+        → อายุเหลือ = (25−15) ÷ 2.0 = <b>5 ปี</b> เท่านั้น</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── KPI Summary ── -->
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+  <div style="background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #C00000;flex:1;min-width:110px">
+    <div style="font-size:26px;font-weight:800;color:#C00000">1</div>
+    <div style="font-size:12px;color:#555;margin-top:3px">หมดอายุแล้ว</div><div style="font-size:11px;color:#888">ต้องเปลี่ยนด่วน</div></div>
+  <div style="background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #ED7D31;flex:1;min-width:110px">
+    <div style="font-size:26px;font-weight:800;color:#ED7D31">3</div>
+    <div style="font-size:12px;color:#555;margin-top:3px">อายุเหลือ ≤ 5 ปี</div><div style="font-size:11px;color:#888">เตรียมงบเปลี่ยน</div></div>
+  <div style="background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #FFD966;flex:1;min-width:110px">
+    <div style="font-size:26px;font-weight:800;color:#d4a800">6</div>
+    <div style="font-size:12px;color:#555;margin-top:3px">อายุเหลือ 6–10 ปี</div><div style="font-size:11px;color:#888">เฝ้าระวัง</div></div>
+  <div style="background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #70AD47;flex:1;min-width:110px">
+    <div style="font-size:26px;font-weight:800;color:#70AD47">27</div>
+    <div style="font-size:12px;color:#555;margin-top:3px">อายุเหลือ &gt; 10 ปี</div><div style="font-size:11px;color:#888">ปลอดภัย</div></div>
+  <div style="background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #2E75B6;flex:1;min-width:110px">
+    <div style="font-size:26px;font-weight:800;color:#2E75B6">37</div>
+    <div style="font-size:12px;color:#555;margin-top:3px">หม้อแปลงทั้งหมด</div><div style="font-size:11px;color:#888">Online เมษายน 2569</div></div>
+</div>
+<div style="font-weight:700;font-size:14px;margin-bottom:10px;color:#333">🗓 อายุการใช้งานที่เหลือรายหม้อแปลง (ครบ 37 ตัว — เรียงตาม Loading)</div>
+<div style="overflow-x:auto;margin-bottom:20px">
+<table style="width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+<thead><tr style="background:#1F3864;color:#fff">
+  <th style="padding:9px">PEA No.</th>
+  <th style="padding:9px;text-align:left">สถานที่</th>
+  <th style="padding:9px">kVA</th>
+  <th style="padding:9px">อายุจริง</th>
+  <th style="padding:9px">Max Load</th>
+  <th style="padding:9px">FAA</th>
+  <th style="padding:9px">อายุเหลือ</th>
+  <th style="padding:9px">ปีที่ควรเปลี่ยน</th>
+  <th style="padding:9px;text-align:left">เหตุที่ต้อง Action</th>
+</tr></thead>
+<tbody>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">55009658</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">วินล่านาวิน</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">15 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#C00000;font-size:12px">124.4%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">2.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#ED7D31;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">5.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2031</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 124.4% — ขยาย kVA ด่วน</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">54008867</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หน้า NP Hotel</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">16 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#C00000;font-size:12px">108.5%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.5×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#ED7D31;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">6.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2032</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 108.5% — ขยาย kVA ด่วน</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">67030375</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">พัทยาเมืองใหม่ 2</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">3 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#C00000;font-size:12px">104.9%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.5×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">14.7 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2040</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 104.9% — ขยาย kVA ด่วน</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">57012655</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">บ้านสวนเนรมิตร</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">250</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">13 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#ED7D31;font-size:12px">92.6%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">12.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2038</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 92.6% — ติดตาม</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">56013661</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ปากซอยหนองหิน</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">200</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">13 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#ED7D31;font-size:12px">84.9%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">12.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2038</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 84.9% — ติดตาม</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">54014907</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยจอมเทียน 13</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">15 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#ED7D31;font-size:12px">84.4%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">10.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2036</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 84.4% — ติดตาม</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">67021835</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยหนองปลาไหล</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">200</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">2 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#ED7D31;font-size:12px">84.1%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">23.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2049</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 84.1% — ติดตาม</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">54014104</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หน้าวัดทุ่งกลม</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">16 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#ED7D31;font-size:12px">81.7%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">9.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2035</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 81.7% — ติดตาม</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">66002351</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยหนองกระบอก</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">250</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">3 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#ED7D31;font-size:12px">81.7%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">22.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2048</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">โหลด 81.7% — ติดตาม</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">46007269</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">นาจอมเทียนซอย 6</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">200</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">24 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#ED7D31;font-size:12px">81.3%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#C00000;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">1.0 ปี ⚠️</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2027</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">อายุเหลือน้อย — เตรียมงบเปลี่ยน / โหลด 81.3% — ติดตาม / อายุ 24 ปี — ตรวจ Oil ด่วน</td>
+</tr>
+<tr style="background:#fffbf0">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">48005133</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยจอมเทียน 6</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">22 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#ED7D31;font-size:12px">80.5%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#C00000;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">3.0 ปี ⚠️</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2029</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">อายุเหลือน้อย — เตรียมงบเปลี่ยน / โหลด 80.5% — ติดตาม / อายุ 22 ปี — ตรวจ Oil ด่วน</td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">41005481</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยจอมเทียน 4</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">27 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">80.0%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1.0×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#C00000;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">หมดอายุ</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">≤ 2026</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">หมดอายุ — เปลี่ยนด่วน / อายุ 27 ปี — ตรวจ Oil ด่วน</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">64004633</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">แกล้มลิง</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">100</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">5 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">79.2%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">25.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2051</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">63010844</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หน้าทะเลเผา</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">200</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">6 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">79.1%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">23.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2049</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">68000879</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หน้าร้านเอแคลร์โมบาย</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">200</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">1 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">79.0%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">30.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2056</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">59007593</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ร้านแดงโลหะกิต</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">10 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">78.9%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">18.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2044</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">63006454</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ห้วยยายจีน</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">7 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">78.5%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">22.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2048</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">65026826</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ปากซอยทุ่งกลม</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">200</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">4 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">76.8%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">26.2 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2052</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">52011218</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หน้าวัดทุ่งระหาร</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">315</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">18 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">76.4%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">8.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2034</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">59018265</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หน้าร้านทอง</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">10 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">73.5%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">18.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2044</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">60010162</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หมู่บ้านภัสสร 1</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">315</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">10 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">73.4%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">18.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2044</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">63030647</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">บ้านสำนักกระรอก</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">6 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">72.9%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">23.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2049</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">64004898</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">เรียบหาด จอมเทียน 15</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">100</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">5 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">66.8%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">25.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2051</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">58000855</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยศาลาร่วมใจ</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">11 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">65.7%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">17.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2043</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">63006906</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">บ้านสวนเนรมิตร 2</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">6 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">65.0%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">23.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2049</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">59949173</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หลังเคหะ</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">100</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">11 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">63.9%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">17.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2043</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">63006910</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยนาเกลือ 2</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">6 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">62.4%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">23.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2049</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">63006909</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หน้าตลาดนาจอมเทียน</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">6 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">60.4%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">23.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2049</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">50116368</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยจอมเทียน 8</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">20 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">55.5%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#ED7D31;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">6.2 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2032</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">62101254</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ปากซอยนาเกลือ</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">100</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">7 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">52.2%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">22.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2048</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">63005719</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยไฮโซ</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">6 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">50.1%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">23.8 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2049</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">66013859</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยหนองกระบอก 2</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">100</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">3 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">50.1%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">27.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2053</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">51011832</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">หน้าวัดชากนอก</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">100</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">19 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">46.8%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#ED7D31;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">7.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2033</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">62101252</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยนาเกลือ</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">100</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">7 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">33.4%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">22.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2048</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">62101250</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">บ้านชลประทาน</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">50</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">7 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">32.1%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">22.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2048</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">56010726</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ซอยหนองหิน</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">50</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">13 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">32.0%</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#FFD966;color:#7d5800;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">15.0 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2041</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+<tr style="background:#fff">
+  <td style="padding:8px 9px;font-family:monospace;font-weight:600;font-size:12px">67030378</td>
+  <td style="padding:8px 9px;font-size:11px;color:#555">ห้วยยายจีน (EV/PV)</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">160</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">3 ปี</td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#333;font-size:12px">–</td>
+  <td style="padding:8px 9px;text-align:center;font-size:12px">0.8×</td>
+  <td style="padding:8px 9px;text-align:center"><span style="background:#70AD47;color:white;border-radius:12px;padding:3px 10px;font-size:12px;font-weight:700">27.5 ปี</span></td>
+  <td style="padding:8px 9px;text-align:center;font-weight:700;color:#2E75B6;font-size:12px">2053</td>
+  <td style="padding:8px 9px;font-size:11px;color:#444">ตามกำหนด PM ปกติ</td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- ── 3. เมื่อไหร่ต้อง Maintenance ── -->
+<div style="font-weight:700;font-size:14px;margin-bottom:12px;color:#333">⚡ เกณฑ์กำหนดเวลา Maintenance (Trigger Criteria)</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:6px">
+  <div style="background:#fff5f5;border-radius:8px;padding:14px;border-left:4px solid #C00000;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+    <div style="font-weight:700;font-size:13px;color:#C00000;margin-bottom:8px">🔴 Maintenance ด่วนทันที</div>
+    <ul style="margin:0;padding-left:16px;font-size:12px;color:#333;line-height:1.8">
+      <li>อายุเหลือ ≤ 0 ปี (หมดอายุแล้ว)</li>
+      <li>โหลดเกิน <b>100%</b> ต่อเนื่อง</li>
+      <li>TTU Offline เกิน 7 วัน</li>
+      <li>Voltage Anomaly ผิดปกติ (เช่น 52011218)</li>
+      <li>Phase Unbalance &gt; 30%</li>
+      <li>DGA พบ Gas ผิดปกติ (H₂, C₂H₂)</li>
+    </ul>
+  </div>
+  <div style="background:#fffbf0;border-radius:8px;padding:14px;border-left:4px solid #ED7D31;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+    <div style="font-weight:700;font-size:13px;color:#ED7D31;margin-bottom:8px">🟠 Maintenance ภายใน 3 เดือน</div>
+    <ul style="margin:0;padding-left:16px;font-size:12px;color:#333;line-height:1.8">
+      <li>อายุเหลือ 1–5 ปี</li>
+      <li>โหลด 80–100% ต่อเนื่อง (&gt; 1 เดือน)</li>
+      <li>อายุจริงเกิน <b>20 ปี</b></li>
+      <li>IR Test &lt; 1,000 MΩ</li>
+      <li>Moisture Content &gt; 20 ppm</li>
+      <li>Acid Number 0.2–0.3 mg KOH/g</li>
+    </ul>
+  </div>
+  <div style="background:#fffde0;border-radius:8px;padding:14px;border-left:4px solid #d4a800;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+    <div style="font-weight:700;font-size:13px;color:#d4a800;margin-bottom:8px">🟡 Maintenance ตามรอบ 6 เดือน</div>
+    <ul style="margin:0;padding-left:16px;font-size:12px;color:#333;line-height:1.8">
+      <li>อายุเหลือ 6–10 ปี</li>
+      <li>โหลดเฉลี่ย 60–80%</li>
+      <li>อายุจริง 10–20 ปี</li>
+      <li>Collection Rate &lt; 90%</li>
+      <li>Phase Unbalance 10–20%</li>
+      <li>Firmware TTU ค้างเวอร์ชันเก่า &gt; 1 ปี</li>
+    </ul>
+  </div>
+  <div style="background:#f5fff5;border-radius:8px;padding:14px;border-left:4px solid #70AD47;box-shadow:0 1px 4px rgba(0,0,0,.07)">
+    <div style="font-weight:700;font-size:13px;color:#70AD47;margin-bottom:8px">🟢 Maintenance ตามรอบ 12 เดือน</div>
+    <ul style="margin:0;padding-left:16px;font-size:12px;color:#333;line-height:1.8">
+      <li>อายุเหลือ &gt; 10 ปี</li>
+      <li>โหลดเฉลี่ย &lt; 60%</li>
+      <li>อายุจริงน้อยกว่า 10 ปี</li>
+      <li>Collection Rate ≥ 95%</li>
+      <li>ไม่มีสัญญาณผิดปกติจาก TTU</li>
+      <li>น้ำมันผ่านมาตรฐาน DGA ทุกค่า</li>
+    </ul>
+  </div>
+</div>
+
+<div id="evpv-plan" class="section-title" style="color:#375623;border-left-color:#70AD47;margin-top:30px">🚗 EV &amp; PV Analysis – PEA 67030378 (ห้วยยายจีน)</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+  <div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #ED7D31">
+    <div style="font-weight:700;font-size:14px;color:#ED7D31;margin-bottom:10px">🔌 EV Charging Summary (เม.ย. 2569)</div>
+    <table style="width:100%;font-size:12px;border-collapse:collapse">
+    <tr><th style="text-align:left;padding:4px 6px;background:#f5f5f5">EV Meter</th><th style="padding:4px 6px;background:#f5f5f5">Avg kW</th><th style="padding:4px 6px;background:#f5f5f5">Utilization</th><th style="padding:4px 6px;background:#f5f5f5">Est. kWh/เดือน</th></tr>
+    <tr><td style="padding:3px 6px;border-bottom:1px solid #eee">B22486020043</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">0.24 kW</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">0.4%</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">~173 kWh</td></tr>
+    <tr><td style="padding:3px 6px;border-bottom:1px solid #eee;font-weight:600;color:#ED7D31">B22486020057 ★</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee;font-weight:700">4.10 kW</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee;font-weight:700;color:#ED7D31">61.0%</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee;font-weight:700">~2,952 kWh</td></tr>
+    <tr><td style="padding:3px 6px">B22486020045</td><td style="text-align:center;padding:3px 6px">0.02 kW</td><td style="text-align:center;padding:3px 6px">0.6%</td><td style="text-align:center;padding:3px 6px">~14 kWh</td></tr>
+    </table>
+    <div style="margin-top:10px;font-size:11px;color:#888;">★ B22486020057 เป็น EV Charger หลักที่ใช้งาน 24 ชม./วัน</div>
+  </div>
+  <div style="background:#fff;border-radius:8px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.08);border-top:4px solid #70AD47">
+    <div style="font-weight:700;font-size:14px;color:#375623;margin-bottom:10px">☀️ PV Generation Summary (เม.ย. 2569)</div>
+    <table style="width:100%;font-size:12px;border-collapse:collapse">
+    <tr><th style="text-align:left;padding:4px 6px;background:#f5f5f5">PV Meter</th><th style="padding:4px 6px;background:#f5f5f5">Avg kW</th><th style="padding:4px 6px;background:#f5f5f5">kWh/เดือน</th></tr>
+    <tr><td style="padding:3px 6px;border-bottom:1px solid #eee">TA2430252835</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">0.56 kW</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">394 kWh</td></tr>
+    <tr><td style="padding:3px 6px;border-bottom:1px solid #eee">TA2470061626</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">0.63 kW</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">448 kWh</td></tr>
+    <tr><td style="padding:3px 6px;border-bottom:1px solid #eee">TA2470061134</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">0.60 kW</td><td style="text-align:center;padding:3px 6px;border-bottom:1px solid #eee">421 kWh</td></tr>
+    <tr style="font-weight:700;color:#375623"><td style="padding:3px 6px">รวม PV</td><td style="text-align:center;padding:3px 6px">1.79 kW</td><td style="text-align:center;padding:3px 6px">1,263 kWh</td></tr>
+    </table>
+    <div style="margin-top:10px;font-size:11px;color:#888;">PV ผลิตสูงสุด 10:00–14:00 น. ช่วย offset Net Load ~1,263 kWh/เดือน</div>
+  </div>
+</div>
+
+<div id="collection-rate" class="section-title">📡 Collection Rate (เมษายน 2569)</div>
+<div class="card" style="margin-bottom:18px">
+  <h3>📊 สรุป Collection Rate มิเตอร์ทั้งหมด 400 เครื่อง</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:16px">
+    <div style="text-align:center;background:#f5f8ff;border-radius:8px;padding:14px;border-top:3px solid #1F3864">
+      <div style="font-size:24px;font-weight:800;color:#1F3864">400</div><div style="font-size:11px;color:#555">มิเตอร์ทั้งหมด</div></div>
+    <div style="text-align:center;background:#e2f0d9;border-radius:8px;padding:14px;border-top:3px solid #70AD47">
+      <div style="font-size:24px;font-weight:800;color:#375623">369</div><div style="font-size:11px;color:#555">CR ≥ 80% (Online)</div></div>
+    <div style="text-align:center;background:#fde8e8;border-radius:8px;padding:14px;border-top:3px solid #C00000">
+      <div style="font-size:24px;font-weight:800;color:#C00000">24</div><div style="font-size:11px;color:#555">CR = 0% (Offline)</div></div>
+    <div style="text-align:center;background:#fef2cc;border-radius:8px;padding:14px;border-top:3px solid #FFD966">
+      <div style="font-size:24px;font-weight:800;color:#8a6514">7</div><div style="font-size:11px;color:#555">CR 1–79% (ต่ำ)</div></div>
+    <div style="text-align:center;background:#f5f8ff;border-radius:8px;padding:14px;border-top:3px solid #2E75B6">
+      <div style="font-size:24px;font-weight:800;color:#2E75B6">92.3%</div><div style="font-size:11px;color:#555">Overall Online Rate</div></div>
+  </div>
+  <table>
+  <thead><tr><th>สถานะ</th><th>จำนวนมิเตอร์</th><th>สัดส่วน</th><th>แนวทางแก้ไข</th></tr></thead>
+  <tbody>
+  <tr><td><span class="badge info">CR 90–100%</span></td><td class="num-col">368</td><td>92.0%</td><td class="loc-cell">ปกติ ไม่ต้องดำเนินการ</td></tr>
+  <tr><td><span class="badge warn">CR 80–89%</span></td><td class="num-col">1</td><td>0.25%</td><td class="loc-cell">ติดตามและตรวจสอบสัญญาณ</td></tr>
+  <tr><td><span class="badge high">CR 1–79%</span></td><td class="num-col">7</td><td>1.75%</td><td class="loc-cell">ตรวจสอบและแก้ไขสัญญาณ GSM/NB-IoT</td></tr>
+  <tr><td><span class="badge critical">CR = 0% (Offline)</span></td><td class="num-col">24</td><td>6.0%</td><td class="loc-cell">เร่งส่งช่างตรวจสอบ / เปลี่ยนอุปกรณ์</td></tr>
+  </tbody>
+  </table>
+</div>
+
+<div id="detail-tables" class="section-title">📋 ตารางรายละเอียด TTU ทั้งหมด (37 Online)</div>
+<div class="card">
+  <h3>🔌 รายละเอียด Loading % หม้อแปลงทั้งหมด (เรียงตาม Loading สูงสุด)</h3>
+  <table>
+  <thead><tr><th>PEA No.</th><th style="text-align:left">สถานที่</th><th>Rated kVA</th><th>Max Load %</th><th>Avg kVA</th><th>Phase Unbal</th><th>สถานะ</th></tr></thead>
+  <tbody>
+<tr>
+    <td class="pea-no">55009658</td>
+    <td class="loc-cell" style="text-align:left">วินล่านาวิน</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#c00000"></div></div><span style="font-weight:700;color:#C00000">124.4%</span></div></td>
+    <td>100.9</td>
+    <td>47.7%</td>
+    <td><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Overload</span></td>
+    </tr><tr>
+    <td class="pea-no">54008867</td>
+    <td class="loc-cell" style="text-align:left">หน้า NP Hotel ซอยไฮโซโอเทว</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#c00000"></div></div><span style="font-weight:700;color:#C00000">108.5%</span></div></td>
+    <td>109.8</td>
+    <td>36.3%</td>
+    <td><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Overload</span></td>
+    </tr><tr>
+    <td class="pea-no">67030375</td>
+    <td class="loc-cell" style="text-align:left">ตรงข้ามพัทยาเมืองใหม่ 2</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:#c00000"></div></div><span style="font-weight:700;color:#C00000">104.9%</span></div></td>
+    <td>118.0</td>
+    <td>64.4%</td>
+    <td><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Overload</span></td>
+    </tr><tr>
+    <td class="pea-no">57012655</td>
+    <td class="loc-cell" style="text-align:left">บ้านสวนเนรมิตร</td>
+    <td>250</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:92.6%;background:#ed7d31"></div></div><span style="font-weight:700;color:#ED7D31">92.6%</span></div></td>
+    <td>134.2</td>
+    <td>66.2%</td>
+    <td><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">High</span></td>
+    </tr><tr>
+    <td class="pea-no">56013661</td>
+    <td class="loc-cell" style="text-align:left">ปากซอยหนองหิน</td>
+    <td>200</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:84.9%;background:#ed7d31"></div></div><span style="font-weight:700;color:#ED7D31">84.9%</span></div></td>
+    <td>132.5</td>
+    <td>63.0%</td>
+    <td><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">High</span></td>
+    </tr><tr>
+    <td class="pea-no">54014907</td>
+    <td class="loc-cell" style="text-align:left">ซอยจอมเทียน 13</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:84.4%;background:#ed7d31"></div></div><span style="font-weight:700;color:#ED7D31">84.4%</span></div></td>
+    <td>102.5</td>
+    <td>38.6%</td>
+    <td><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">High</span></td>
+    </tr><tr>
+    <td class="pea-no">67021835</td>
+    <td class="loc-cell" style="text-align:left">ซอยหนองปลาไหล</td>
+    <td>200</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:84.1%;background:#ed7d31"></div></div><span style="font-weight:700;color:#ED7D31">84.1%</span></div></td>
+    <td>123.2</td>
+    <td>55.8%</td>
+    <td><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">High</span></td>
+    </tr><tr>
+    <td class="pea-no">54014104</td>
+    <td class="loc-cell" style="text-align:left">หน้าวัดทุ่งกลม</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:81.7%;background:#ed7d31"></div></div><span style="font-weight:700;color:#ED7D31">81.7%</span></div></td>
+    <td>91.5</td>
+    <td>53.4%</td>
+    <td><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">High</span></td>
+    </tr><tr>
+    <td class="pea-no">66002351</td>
+    <td class="loc-cell" style="text-align:left">ซอยหนองกระบอก</td>
+    <td>250</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:81.7%;background:#ed7d31"></div></div><span style="font-weight:700;color:#ED7D31">81.7%</span></div></td>
+    <td>164.8</td>
+    <td>37.8%</td>
+    <td><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">High</span></td>
+    </tr><tr>
+    <td class="pea-no">46007269</td>
+    <td class="loc-cell" style="text-align:left">นาจอมเทียนซอย 6</td>
+    <td>200</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:81.3%;background:#ed7d31"></div></div><span style="font-weight:700;color:#ED7D31">81.3%</span></div></td>
+    <td>124.4</td>
+    <td>27.9%</td>
+    <td><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">High</span></td>
+    </tr><tr>
+    <td class="pea-no">48005133</td>
+    <td class="loc-cell" style="text-align:left">ซอยจอมเทียน 6</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:80.5%;background:#ed7d31"></div></div><span style="font-weight:700;color:#ED7D31">80.5%</span></div></td>
+    <td>88.0</td>
+    <td>46.8%</td>
+    <td><span style="background:#ED7D31;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">High</span></td>
+    </tr><tr>
+    <td class="pea-no">41005481</td>
+    <td class="loc-cell" style="text-align:left">ซอยจอมเทียน 4</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:80.0%;background:#ffd966"></div></div><span style="font-weight:700;color:#8a6514">80.0%</span></div></td>
+    <td>89.6</td>
+    <td>46.4%</td>
+    <td><span style="background:#8a6514;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Watch</span></td>
+    </tr><tr>
+    <td class="pea-no">64004633</td>
+    <td class="loc-cell" style="text-align:left">แกล้มลิง</td>
+    <td>100</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:79.2%;background:#ffd966"></div></div><span style="font-weight:700;color:#8a6514">79.2%</span></div></td>
+    <td>54.5</td>
+    <td>58.4%</td>
+    <td><span style="background:#8a6514;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Watch</span></td>
+    </tr><tr>
+    <td class="pea-no">63010844</td>
+    <td class="loc-cell" style="text-align:left">หน้าทะเลเผา</td>
+    <td>200</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:79.1%;background:#ffd966"></div></div><span style="font-weight:700;color:#8a6514">79.1%</span></div></td>
+    <td>121.4</td>
+    <td>83.8%</td>
+    <td><span style="background:#8a6514;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Watch</span></td>
+    </tr><tr>
+    <td class="pea-no">68000879</td>
+    <td class="loc-cell" style="text-align:left">หน้าร้านเอแคลร์โมบาย</td>
+    <td>200</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:79.0%;background:#ffd966"></div></div><span style="font-weight:700;color:#8a6514">79.0%</span></div></td>
+    <td>108.0</td>
+    <td>65.0%</td>
+    <td><span style="background:#8a6514;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Watch</span></td>
+    </tr><tr>
+    <td class="pea-no">59007593</td>
+    <td class="loc-cell" style="text-align:left">ร้านแดงโลหะกิต</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:78.9%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">78.9%</span></div></td>
+    <td>84.2</td>
+    <td>80.0%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">63006454</td>
+    <td class="loc-cell" style="text-align:left">ห้วยยายจีน</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:78.5%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">78.5%</span></div></td>
+    <td>94.4</td>
+    <td>168.1%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">65026826</td>
+    <td class="loc-cell" style="text-align:left">ปากซอยทุ่งกลม</td>
+    <td>200</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:76.8%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">76.8%</span></div></td>
+    <td>115.7</td>
+    <td>30.1%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">52011218</td>
+    <td class="loc-cell" style="text-align:left">หน้าวัดทุ่งระหาร</td>
+    <td>315</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:76.4%;background:#ffd966"></div></div><span style="font-weight:700;color:#C00000">76.4%</span></div></td>
+    <td>162.9</td>
+    <td>53.6%</td>
+    <td><span style="background:#C00000;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Voltage!</span></td>
+    </tr><tr>
+    <td class="pea-no">59018265</td>
+    <td class="loc-cell" style="text-align:left">หน้าร้านทอง</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:73.5%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">73.5%</span></div></td>
+    <td>74.9</td>
+    <td>96.8%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">60010162</td>
+    <td class="loc-cell" style="text-align:left">หมู่บ้านภัสสร 1</td>
+    <td>315</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:73.4%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">73.4%</span></div></td>
+    <td>162.2</td>
+    <td>45.3%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">63030647</td>
+    <td class="loc-cell" style="text-align:left">บ้านสำนักกระรอก</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:72.9%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">72.9%</span></div></td>
+    <td>77.0</td>
+    <td>37.8%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">64004898</td>
+    <td class="loc-cell" style="text-align:left">เรียบหาด ก่อน ซอยจอมเทียน 15</td>
+    <td>100</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:66.8%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">66.8%</span></div></td>
+    <td>45.7</td>
+    <td>59.6%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">58000855</td>
+    <td class="loc-cell" style="text-align:left">ซอยศาลาร่วมใจ</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:65.7%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">65.7%</span></div></td>
+    <td>67.7</td>
+    <td>46.7%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">63006906</td>
+    <td class="loc-cell" style="text-align:left">บ้านสวนเนรมิตร 2</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:65.0%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">65.0%</span></div></td>
+    <td>78.5</td>
+    <td>61.8%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">59949173</td>
+    <td class="loc-cell" style="text-align:left">หลังเคะหะ</td>
+    <td>100</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:63.9%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">63.9%</span></div></td>
+    <td>46.1</td>
+    <td>91.0%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">63006910</td>
+    <td class="loc-cell" style="text-align:left">ซอยนาเกลือ 2</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:62.4%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">62.4%</span></div></td>
+    <td>66.0</td>
+    <td>83.4%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">63006909</td>
+    <td class="loc-cell" style="text-align:left">หน้าตลาดนาจอมเทียน</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:60.4%;background:#ffd966"></div></div><span style="font-weight:700;color:#375623">60.4%</span></div></td>
+    <td>66.5</td>
+    <td>75.8%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">50116368</td>
+    <td class="loc-cell" style="text-align:left">ซอยจอมเทียน 8</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:55.5%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">55.5%</span></div></td>
+    <td>56.2</td>
+    <td>67.1%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">62101254</td>
+    <td class="loc-cell" style="text-align:left">ปากซอยนาเกลือ</td>
+    <td>100</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:52.2%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">52.2%</span></div></td>
+    <td>25.7</td>
+    <td>39.8%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">63005719</td>
+    <td class="loc-cell" style="text-align:left">ซอยไฮโซ</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:50.1%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">50.1%</span></div></td>
+    <td>53.6</td>
+    <td>72.0%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">66013859</td>
+    <td class="loc-cell" style="text-align:left">ซอยหนองกระบอก 2</td>
+    <td>100</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:50.1%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">50.1%</span></div></td>
+    <td>28.7</td>
+    <td>94.4%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">51011832</td>
+    <td class="loc-cell" style="text-align:left">หน้าวัดชากนอก</td>
+    <td>100</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:46.8%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">46.8%</span></div></td>
+    <td>31.9</td>
+    <td>148.6%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">62101252</td>
+    <td class="loc-cell" style="text-align:left">ซอยนาเกลือ</td>
+    <td>100</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:33.4%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">33.4%</span></div></td>
+    <td>18.3</td>
+    <td>65.3%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">62101250</td>
+    <td class="loc-cell" style="text-align:left">บ้านชลประทาน</td>
+    <td>50</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:32.1%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">32.1%</span></div></td>
+    <td>10.0</td>
+    <td>71.0%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">56010726</td>
+    <td class="loc-cell" style="text-align:left">ซอยหนองหิน</td>
+    <td>50</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:32.0%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">32.0%</span></div></td>
+    <td>10.4</td>
+    <td>147.7%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr><tr>
+    <td class="pea-no">67030378</td>
+    <td class="loc-cell" style="text-align:left">ห้วยยายจีน (EV/PV)</td>
+    <td>160</td>
+    <td><div style="display:inline-flex;align-items:center;gap:6px"><div class="bar-wrap"><div class="bar-fill" style="width:0.0%;background:#70AD47"></div></div><span style="font-weight:700;color:#375623">–</span></div></td>
+    <td>63.8</td>
+    <td>64.3%</td>
+    <td><span style="background:#375623;color:#fff;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600">Normal</span></td>
+    </tr></tbody></table></div>
+
+<div class="footer">
+  Smart TTU Monthly Report  |  เดือนเมษายน 2569  |  กฟภ. สาขาจอมเทียน<br>
+  วิเคราะห์โดย Smart TTU System  •  ข้อมูล ณ สิ้นเดือนเมษายน 2569
+</div>
+</div><!-- /container -->
+
+<script>
+// TTU Donut
+new Chart(document.getElementById('ttuDonut'), {
+  type:'doughnut',
+  data:{labels:['Online','Offline','Overload>100%'],
+    datasets:[{data:[34,3,3],backgroundColor:['#70AD47','#595959','#C00000'],borderWidth:2,borderColor:'#fff'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},cutout:'65%'}
+});
+// Meter Donut
+new Chart(document.getElementById('meterDonut'), {
+  type:'doughnut',
+  data:{labels:['CR ≥90%','CR 80-89%','CR <80%'],
+    datasets:[{data:[368,1,31],backgroundColor:['#70AD47','#FFD966','#C00000'],borderWidth:2,borderColor:'#fff'}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},cutout:'65%'}
+});
+// Loading Bar
+new Chart(document.getElementById('loadBar'), {
+  type:'bar',
+  data:{
+    labels:['55009658\nวินล่า','54008867\nNP Hotel','67030375\nพัทยาใหม่','57012655\nสวนเนรมิตร','56013661\nหนองหิน','54014907\nจอมเทียน13','67021835\nหนองปลาไหล','54014104\nวัดทุ่งกลม','66002351\nหนองกระบอก','46007269\nนาจอมเทียน6','48005133\nจอมเทียน6','41005481\nจอมเทียน4','64004633\nแกล้มลิง','63010844\nทะเลเผา','68000879\nเอแคลร์'],
+    datasets:[{label:'Loading %',
+      data:[124.4,108.5,104.9,92.6,84.9,84.4,84.1,81.7,81.7,81.3,80.5,80.0,79.2,79.1,79.0],
+      backgroundColor:[124.4,108.5,104.9,92.6,84.9,84.4,84.1,81.7,81.7,81.3,80.5,80.0,79.2,79.1,79.0].map(v=>v>100?'#C00000':v>80?'#ED7D31':'#FFD966'),
+      borderRadius:3}]
+  },
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+      annotation:{annotations:{line80:{type:'line',x:80,borderColor:'#1F3864',borderWidth:2,borderDash:[5,3]},line100:{type:'line',x:100,borderColor:'#C00000',borderWidth:2}}}},
+    scales:{x:{min:0,max:140,title:{display:true,text:'Loading (%)'},
+      ticks:{callback:v=>v+'%'}},y:{ticks:{font:{size:8}}}}}
+});
+// Voltage Bar
+new Chart(document.getElementById('voltageBar'), {
+  type:'bar',
+  data:{
+    labels:['52011218\nวัดทุ่งระหาร','54008867\nNP Hotel','67030378\nห้วยยายจีน','63030647\nสำนักกระรอก','64004898\nจอมเทียน15','58000855\nศาลาร่วมใจ','55009658\nวินล่า','63006906\nสวนเนรมิตร2'],
+    datasets:[
+      {label:'Min V',data:[157.2,178.1,216.0,223.1,223.8,226.4,227.0,237.9],backgroundColor:'rgba(192,0,0,0.7)',borderRadius:2},
+      {label:'Avg V',data:[225.4,225.3,228.7,226.7,228.1,230.3,231.3,241.5],backgroundColor:'rgba(46,117,182,0.7)',borderRadius:2},
+      {label:'Max V',data:[278.8,233.1,233.9,230.1,232.2,233.7,234.7,244.9],backgroundColor:'rgba(112,173,71,0.7)',borderRadius:2}
+    ]
+  },
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{font:{size:10}}}},
+    scales:{x:{ticks:{font:{size:8},maxRotation:45}},
+      y:{min:140,max:285,title:{display:true,text:'Voltage (V)'},
+        ticks:{callback:v=>v+'V'}}}}
+});
+// Hourly 59007593
+new Chart(document.getElementById('hourly59'), {
+  type:'line',
+  data:{labels:["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
+    datasets:[
+      {label:'Load (kWh/15min avg)',data:[20.28,19.26,18.01,17.46,16.56,15.77,15.09,15.28,17.55,21.93,23.46,24.17,24.34,24.99,25.27,24.92,24.28,22.17,21.33,23.54,24.22,23.15,21.91,22.25],borderColor:'#2E75B6',backgroundColor:'rgba(46,117,182,.12)',fill:true,tension:.4,yAxisID:'y'},
+      {label:'Loss %',data:[9.14,8.70,8.63,8.89,8.88,8.42,8.82,7.19,7.61,8.26,7.33,7.64,8.11,8.07,7.81,7.88,7.82,9.31,7.79,8.33,8.27,8.68,8.34,8.86],borderColor:'#ED7D31',fill:false,tension:.4,yAxisID:'y2',borderDash:[5,3]}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},
+    scales:{y:{type:'linear',position:'left',title:{display:true,text:'Load (kWh)'}},
+      y2:{type:'linear',position:'right',title:{display:true,text:'Loss %'},ticks:{callback:v=>v+'%'},grid:{drawOnChartArea:false}}}}
+});
+// Hourly 67030378
+new Chart(document.getElementById('hourly67'), {
+  type:'line',
+  data:{labels:["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
+    datasets:[
+      {label:'Load (kWh/15min avg)',data:[18.95,18.22,16.62,15.74,16.68,14.94,15.74,14.33,13.19,13.33,10.91,10.63,11.52,11.67,12.02,13.41,15.45,18.72,21.59,22.96,21.71,21.41,20.03,21.42],borderColor:'#2E75B6',backgroundColor:'rgba(46,117,182,.12)',fill:true,tension:.4,yAxisID:'y'},
+      {label:'Loss %',data:[1.91,4.44,3.08,3.20,6.95,5.52,9.13,2.83,-4.37,0.83,-28.52,-22.64,-17.92,-30.09,-19.43,-5.97,4.05,16.18,17.02,17.43,6.34,8.12,6.94,4.54],borderColor:'#ED7D31',fill:false,tension:.4,yAxisID:'y2',borderDash:[5,3]}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:10}}}},
+    scales:{y:{type:'linear',position:'left',title:{display:true,text:'Load (kWh)'}},
+      y2:{type:'linear',position:'right',title:{display:true,text:'Loss %'},ticks:{callback:v=>v+'%'},grid:{drawOnChartArea:false}}}}
+});
+// Daily Loss 59007593
+new Chart(document.getElementById('daily59'), {
+  type:'bar',
+  data:{
+    labels:["04-01","04-02","04-03","04-04","04-05","04-06","04-07","04-08","04-09","04-10","04-11","04-12","04-13","04-14","04-15","04-16","04-17","04-18","04-19","04-20","04-21","04-22","04-23","04-24","04-25","04-26","04-27","04-28","04-29","04-30"],
+    datasets:[{label:'Daily Median Loss %',
+      data:[9.09,8.36,8.53,8.88,9.60,8.15,9.52,8.41,6.98,7.79,8.69,8.09,8.04,8.16,7.52,8.81,8.83,7.67,8.64,7.36,8.20,8.06,7.97,8.63,7.45,9.21,8.32,8.22,8.28,9.12],
+      backgroundColor:[9.09,8.36,8.53,8.88,9.60,8.15,9.52,8.41,6.98,7.79,8.69,8.09,8.04,8.16,7.52,8.81,8.83,7.67,8.64,7.36,8.20,8.06,7.97,8.63,7.45,9.21,8.32,8.22,8.28,9.12].map(v=>v>15?'#C00000':v>10?'#ED7D31':v>5?'#FFD966':'#70AD47'),
+      borderRadius:3}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{ticks:{font:{size:8},maxRotation:90}},
+      y:{title:{display:true,text:'Loss %'},ticks:{callback:v=>v+'%'}}}}
+});
+// Daily Loss 67030378
+new Chart(document.getElementById('daily67'), {
+  type:'bar',
+  data:{
+    labels:["04-03","04-04","04-05","04-06","04-07","04-08","04-09","04-10","04-11","04-12","04-13","04-14","04-15","04-16","04-17","04-18","04-19","04-20","04-21","04-22","04-23","04-24","04-25","04-26","04-27","04-28","04-29","04-30"],
+    datasets:[{label:'Daily Loss %',
+      data:[5.11,4.77,2.60,3.73,6.31,3.95,1.97,-0.43,1.45,0.41,-0.45,-0.55,0.73,2.56,3.57,1.82,2.03,4.26,-1.02,1.12,3.40,4.75,1.05,4.48,3.04,1.50,4.37,2.16],
+      backgroundColor:[5.11,4.77,2.60,3.73,6.31,3.95,1.97,-0.43,1.45,0.41,-0.45,-0.55,0.73,2.56,3.57,1.82,2.03,4.26,-1.02,1.12,3.40,4.75,1.05,4.48,3.04,1.50,4.37,2.16].map(v=>v<0?'#70AD47':v>15?'#C00000':v>5?'#FFD966':'#2E75B6'),
+      borderRadius:3}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{ticks:{font:{size:9}}},
+      y:{title:{display:true,text:'Loss %'},ticks:{callback:v=>v+'%'}}}}
+});
+// PV Chart
+new Chart(document.getElementById('pvChart'), {
+  type:'line',
+  data:{labels:["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23"],
+    datasets:[
+      {label:'PV Output (kW)',data:[0,0,0,0,0,0,0.15,1.16,2.78,4.12,5.22,5.36,5.02,5.28,5.00,4.06,2.79,1.15,0.07,0,0,0,0,0],borderColor:'#70AD47',backgroundColor:'rgba(112,173,71,.2)',fill:true,tension:.4}
+    ]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11}}}},
+    scales:{x:{ticks:{font:{size:9}}},y:{title:{display:true,text:'กำลัง (kW)'}}}}
+});
+</script>
+</body>
+</html>

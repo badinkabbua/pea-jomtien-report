@@ -109,7 +109,7 @@
   <div class="loading-text" id="loadText">กำลังโหลดรายงาน...</div>
 </div>
 
-<iframe id="reportFrame" src="" onload="hideOverlay()"></iframe>
+<iframe id="reportFrame"></iframe>
 
 <script>
 const labels = {
@@ -127,4 +127,6 @@ function changeMonth(src) {
   document.getElementById('reportFrame').src = bust(src);
 }
 function hideOverlay() {
-  document.getElementById('overlay').
+  document.getElementById('overlay').classList.add('hidden');
+}
+// 

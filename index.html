@@ -109,7 +109,7 @@
   <div class="loading-text" id="loadText">กำลังโหลดรายงาน...</div>
 </div>
 
-<iframe id="reportFrame" src="may-2569.html" onload="hideOverlay()"></iframe>
+<iframe id="reportFrame" src="" onload="hideOverlay()"></iframe>
 
 <script>
 const labels = {
@@ -117,16 +117,14 @@ const labels = {
   'april-2569.html': 'เมษายน 2569',
   'march-2569.html': 'มีนาคม 2569'
 };
+var _ts = Date.now();
+function bust(src) { return src + '?t=' + _ts; }
 function changeMonth(src) {
+  _ts = Date.now();
   document.getElementById('overlay').classList.remove('hidden');
   document.getElementById('loadText').textContent = 'กำลังโหลด ' + (labels[src]||src) + ' ...';
   document.getElementById('badge').textContent = '🗓 ' + (labels[src]||src);
-  document.getElementById('reportFrame').src = src;
+  document.getElementById('reportFrame').src = bust(src);
 }
 function hideOverlay() {
-  document.getElementById('overlay').classList.add('hidden');
-}
-setTimeout(hideOverlay, 6000);
-</script>
-</body>
-</html>
+  document.getElementById('overlay').
